@@ -4,8 +4,16 @@
   "description": "portfolio for web dev projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass-chokidar src/styles/sass/ -o src/styles/",
+    "watch-css": "node-sass-chokidar src/styles/sass/ -o src/styles/ --watch --recursive"
   },
   "author": "abbey reisle",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "0.0.3"
+  }
 }
