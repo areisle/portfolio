@@ -1,3 +1,5 @@
 *.css
 node_modules/*
-src/images/*
+client/src/images/*
+*.sql
+
