@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './styles/normalize.css';
 import './styles/index.css';
-
-import {getProjectNames, getProjectOutlines} from './api.js';
-import { BrowserRouter } from 'react-router-dom';
+import {Overview, Project} from './project.js'
+import {getProjectNames, getProjectOutlines, getProject} from './api.js';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 
-function Test(props) {
-  return (<div>testing 1 2 3</div>);
-}
+//list of projects
 class ProjectsContainer extends Component {
   constructor(props) {
     super(props);
@@ -23,15 +21,15 @@ class ProjectsContainer extends Component {
       });
     });
     getProjectOutlines().then(data => {
+      console.log(data);
       this.setState({
         projects: data,
       });
     });
   }
   render () {
-    let projects = this.state.projects.map(project => {
-      let {name, category, tags} = project;
-      return (<li key={name} className="project" category={category} tags={tags}>{name}</li>);
+    let projects = this.props.projects.map(project => {
+      return (<Overview details={project}></Overview>);
     });
     return (
         <ul className="projects-container">
@@ -40,38 +38,72 @@ class ProjectsContainer extends Component {
     );
   }
 }
-class List extends Component {
-  constructor (props) {
-    super(props);
-    //set state with fetch?
+
+
+
+
+class App extends Component {
+  constructor() {
+    super();
     this.state = {
-      names: [],
+      projects: [],
+      layout: 'small',
+      currentProject: {},
     }
     
-    getProjectNames().then(data => {
+    getProjectOutlines().then(data => {
       this.setState({
-        names: data,
+        projects: data,
       });
     });
-      
+    
+    this.updateLayout = this.updateLayout.bind(this);
   }
-  render () {
-    let listitems = this.state.names.map(name => (<li>{name}</li>));
-    return (
-      <ul>{listitems}</ul>
-    );
+  componentDidMount() {
+    //add resize event listener
+    this.updateLayout();
+    window.addEventListener('resize', this.updateLayout);
   }
-}
-class App extends Component {
+  
+  updateLayout() {
+    if (window.innerWidth >= 1200) {
+      this.setState({layout: 'wide'});
+    } else {
+      this.setState({layout: 'small'});
+    }
+  }
+  
   render () {
+    let projects = this.state.projects;
+    let length = projects.length;
+    let routes = projects.map((project, index) => {
+      let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
+      return (
+        <Route key={`/${project.slug}`} exact path={`/${project.slug}`} 
+                render={() => <Project details={project} slug={project.slug} next={projects[next].slug} prev={projects[prev].slug}></Project>}/>
+      );
+    })
     return (
-      <section className="projects-container-wrapper">
-      <Switch>
-         
-        <Route exact path='/' component={ProjectsContainer}/>
-        
-      </Switch>
-      </section>
+      <div className={`app-wrapper`} >
+        <header className="header-nav">
+          <h1><span className="short">ABBEY REISLE</span><span className="long">Abbey Reisle</span></h1>
+          <nav className="main-nav">
+            <ul>
+              <li><Link key="portfolio" to={'/'}>Portfolio</Link></li>
+              <li><Link key="about" to={'/'}>About</Link></li>
+            </ul>
+          </nav>
+        </header>
+        <main className={`main view-${this.state.layout}`}>
+          <section className="panel panel-1">
+          <Switch>
+            <Route exact path='/' render={() => <ProjectsContainer projects={this.state.projects}></ProjectsContainer>}/>
+            {routes}
+          </Switch>
+          </section>
+          <section className="panel panel-2"></section>
+        </main>
+      </div>
     );
   }
 }

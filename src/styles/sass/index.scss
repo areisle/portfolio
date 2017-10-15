@@ -1,13 +1,25 @@
 @import "functions";
 @import "variables";
 @import "project";
+@import "icons";
+@import url('https://fonts.googleapis.com/css?family=Buda:300|Heebo:100|Italiana|Tenor+Sans|Uncial+Antiqua');
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+//  font-family: 'Tenor Sans', sans-serif;
+//font-family: 'Italiana', serif; //okay, but not my favourite
+//font-family: 'Uncial Antiqua', cursive; //just awful 0/10
+font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
+//font-family: 'Buda', cursive; 2/10
+//  text-transform: uppercase;
+  font-weight: 500;
 }
-
+.view-wide {
+  display: flex;
+  justify-content: space-around;
+}
 html, body {
   margin: 0;
   padding: 0;
@@ -15,8 +27,16 @@ html, body {
   min-height: 100vh;
 }
 .main {
-  min-height: 100vh;
+  height: 100vh;
+  @include testing(purple);
+}
+.panel-2 {
   @include testing(green);
+}
+.panel-1 {
+  @include testing(orange);
+}
+.panel > *:last-child {
   margin-bottom: $main-nav-height;
 }
 .header-nav {
@@ -62,4 +82,26 @@ html, body {
 }
 @media only screen and (min-width: 560px) {
   //enough room to add logo
+}
+@media only screen and (min-width: $double-panels-60-40) {
+  //split into 2 halves
+  .panel-1 {
+    width: 60%;
+  }
+  .panel-2 {
+    flex-grow: 1;
+  }
+  .panel-1 {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .panel-1::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media only screen and (min-width: $breakpoint-5) {
+  //split into 2 halves
+  .panel-1 {
+    width: 50%;
+  }
 }
