@@ -14,11 +14,6 @@
   "author": "abbey reisle",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "express-validator": "^4.2.1",
-    "nodemailer": "^4.2.0",
     "normalize.css": "^7.0.0",
     "react-router-dom": "^4.2.2"
   },
