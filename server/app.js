@@ -1,15 +1,23 @@
-let mysql = require('mysql');
-let express = require('express');
-let cors = require('cors');
-let app = express();
+const mysql = require('mysql');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
+const { matchedData, sanitize } = require('express-validator/filter');
+const {MUSER, MPASS, DBUSER, DBPASS, DBHOST, DB, MTO} = process.env
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 let connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'testdb_portfolio'
+  host: DBHOST,
+  user: DBUSER,
+  password: DBPASS,
+  database: DB
 })
 
 connection.connect();
@@ -39,6 +47,70 @@ app.listen(3001, function() {
   console.log('Example app listening on port 3001!');
 });
 
+app.post('/contact/send', function(req, res) {
+  //parse json for name, company, email, message
+  console.log('request received', req.body);
+  //parse body for details/ validate and format to send as email
+  let smtpTrans, mailOpts;
+  smtpTrans = nodemailer.createTransport({
+    service: 'Gmail', 
+    auth: {
+      user: USER,
+      pass: PASS
+    }
+  });
+  mailOpts = {
+    from: `${req.body.name} &lt;${req.body.email}&gt;`,
+    to: MTO,
+    subject: "testing 1 2 3",
+    text: req.body.message
+  };
+  smtpTrans.sendMail(mailOpts, function() {
+    res.send('success');
+  });
+  res.send(req.body);
+});
+
+app.post('/contact/', [
+  check('email').isEmail()
+                .normalizeEmail(),
+  check(['firstname', 'lastname']).isAlpha()
+               .isLength({min: 2, max: 300})
+               .trim()
+               .escape(),
+  check(['message', 'subject'])
+                  .not().isEmpty()
+                  .trim()
+                  .escape(),
+  check('company').optional()
+                  .trim()
+                  .escape()
+], (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+  // data was validated, proceed to format then send email
+  const data = matchedData(req);
+  let smtpTrans, mailOpts;
+  smtpTrans = nodemailer.createTransport({
+    service: 'Gmail', 
+    auth: {
+      user: MUSER,
+      pass: MPASS
+    }
+  });
+  mailOpts = {
+    from: `${data.firstname} ${data.lastname} &lt;${MUSER}&gt;`,
+    to: MTO,
+    subject: data.subject,
+    text: `FROM: ${data.firstname} ${data.lastname} \<${data.email}\> \n ${data.message}`
+  };
+//  smtpTrans.sendMail(mailOpts, function() {
+//    res.send('success');
+//  });
+});
+
 function getProjectOutlines() {
   return new Promise(function (resolve, reject) {
     connection.query('SELECT name, slug, category, tags FROM Projects', function(err, results) {
@@ -63,3 +135,12 @@ function getProject(name) {
     });
   });
 }
+
+const cleanup = (msg='') => {
+   console.log('cleaning up', msg);
+   connection.end();
+   //app.close(); //fix this later?
+   process.exit();
+};
+process.on('SIGINT', cleanup);
+process.on('uncaughtException', cleanup);
