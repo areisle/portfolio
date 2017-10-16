@@ -14,8 +14,6 @@
   "author": "abbey reisle",
   "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
     "normalize.css": "^7.0.0",
     "react-router-dom": "^4.2.2"
   },
