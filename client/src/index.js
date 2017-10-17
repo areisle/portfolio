@@ -6,7 +6,7 @@ import {Overview, Project} from './project.js'
 import {getProjectNames, getProjectOutlines, getProject} from './api.js';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
-
+import {ContactForm} from './contact-form.js';
 //list of projects
 class ProjectsContainer extends Component {
   constructor(props) {
