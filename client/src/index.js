@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './styles/normalize.css';
 import './styles/index.css';
 import {Overview, Project} from './project.js'
-import {getProjectNames, getProjectOutlines, getProject} from './api.js';
+import {getProjectNames, getProjectOutlines} from './api.js';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import {ContactForm} from './contact-form.js';
+import {About} from './about.js';
 //list of projects
 class ProjectsContainer extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class ProjectsContainer extends Component {
       });
     });
     getProjectOutlines().then(data => {
-      console.log(data);
       this.setState({
         projects: data,
       });
@@ -29,7 +29,7 @@ class ProjectsContainer extends Component {
   }
   render () {
     let projects = this.props.projects.map(project => {
-      return (<Overview details={project}></Overview>);
+      return (<Overview key={project.slug} details={project}></Overview>);
     });
     return (
         <ul className="projects-container">
@@ -79,7 +79,7 @@ class App extends Component {
     let routes = projects.map((project, index) => {
       let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
       return (
-        <Route key={`/${project.slug}`} exact path={`/${project.slug}`} 
+        <Route key={`/${project.slug}`} exact path={`/project/${project.slug}`} 
                 render={() => <Project details={project} slug={project.slug} next={projects[next].slug} prev={projects[prev].slug}></Project>}/>
       );
     })
@@ -89,20 +89,65 @@ class App extends Component {
           <h1><span className="short">ABBEY REISLE</span><span className="long">Abbey Reisle</span></h1>
           <nav className="main-nav">
             <ul>
-              <li><Link key="portfolio" to={'/'}>Portfolio</Link></li>
-              <li><Link key="about" to={'/'}>About</Link></li>
+              <li><Link key="portfolio" to={'/portfolio'}>Portfolio</Link></li>
+              <li><Link key="about" to={'/about-contact'}>About</Link></li>
             </ul>
           </nav>
         </header>
-        <main className={`main view-${this.state.layout}`}>
+        
+       <Switch>
+         <Route exact path='/' render={() => {
+             return (
+               <main className={`main view-${this.state.layout}`}>
+                  <section className="panel panel-1">
+                   <ProjectsContainer projects={this.state.projects}></ProjectsContainer>
+                  </section>
+                  <section className="panel panel-2">
+                    <About></About>
+                    <ContactForm></ContactForm>
+                  </section>
+               </main>
+             );
+          }}/>
+          <Route exact path='/about-contact' render={() => {
+             return (
+               <main className={`main view-${this.state.layout}`}>
+                  <section className="panel panel-1">
+                   <ProjectsContainer projects={this.state.projects}></ProjectsContainer>
+                  </section>
+                  <section className="panel panel-2 active">
+                    <About></About>
+                    <ContactForm></ContactForm>
+                  </section>               
+                </main>
+             );
+          }}/>
+          <Route exact path='/portfolio' render={() => {
+             return (
+               <main className={`main view-${this.state.layout}`}>
+                  <section className="panel panel-1 active">
+                   <ProjectsContainer projects={this.state.projects}></ProjectsContainer>
+                 </section>
+                 <section className="panel panel-2">
+                    <About></About>
+                    <ContactForm></ContactForm>
+                  </section>
+               </main>
+             );
+          }}/>
+          {routes}
+       </Switch>
+        {/*<!--
           <section className="panel panel-1">
           <Switch>
             <Route exact path='/' render={() => <ProjectsContainer projects={this.state.projects}></ProjectsContainer>}/>
-            {routes}
+            <Route exact path='/portfolio' render={() => <ProjectsContainer projects={this.state.projects}></ProjectsContainer>}/>
+            <Route exact path='/about-contact' render={() => <ProjectsContainer projects={this.state.projects}></ProjectsContainer>}/>
+            routes
           </Switch>
           </section>
-          <section className="panel panel-2"></section>
-        </main>
+          <section className="panel panel-2"><ContactForm></ContactForm></section>
+-->*/}
       </div>
     );
   }

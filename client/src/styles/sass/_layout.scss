@@ -1,0 +1,67 @@
+.view-wide {
+  display: flex;
+  justify-content: space-around;
+}
+.view-small {
+  .panel:not(.active) {
+    display: none;
+  }
+}
+html, body, .main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+.main {
+  @include testing(purple);
+}
+.panel {
+  width: 100%;
+  h2 {
+    margin: 1em;
+  }
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+.panel-2 {
+  @include testing(green);
+}
+.panel-1 {
+  @include testing(orange);
+}
+.panel > *:last-child {
+  margin-bottom: $main-nav-height;
+}
+
+@media only screen and (min-width: 560px) {
+  //enough room to add logo
+}
+@media only screen and (min-width: $double-panels-60-40) {
+  .panel {
+    width: 30%;
+    max-height: 100vh;
+    overflow-y: auto;
+    transition: width 0.3s;
+    flex-grow: 1;
+    transition: flex-grow 0.3s;
+  }
+  
+  .panel.active {
+    flex-grow: 4;
+    display: flex;
+  }
+}
+@media only screen and (min-width: $breakpoint-5) {
+  //split into 2 halves
+//  .panel-1, .panel-2 {
+//    width: 50%;
+//  }
+}
+
+.about {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+}

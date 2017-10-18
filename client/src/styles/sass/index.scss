@@ -1,5 +1,6 @@
 @import "functions";
 @import "variables";
+@import "layout";
 @import "project";
 @import "icons";
 @import url('https://fonts.googleapis.com/css?family=Buda:300|Heebo:100|Italiana|Tenor+Sans|Uncial+Antiqua');
@@ -16,29 +17,7 @@ font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
 //  text-transform: uppercase;
   font-weight: 500;
 }
-.view-wide {
-  display: flex;
-  justify-content: space-around;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-}
-.main {
-  height: 100vh;
-  @include testing(purple);
-}
-.panel-2 {
-  @include testing(green);
-}
-.panel-1 {
-  @include testing(orange);
-}
-.panel > *:last-child {
-  margin-bottom: $main-nav-height;
-}
+
 .header-nav {
   height: $main-nav-height;
   width: 100%;
@@ -74,34 +53,10 @@ html, body {
     align-items: center;
     @include testing(blue);
     height: 100%;
+    background: lightgray;
   }
   a {
     width: 100%;
     text-decoration: none;
-  }
-}
-@media only screen and (min-width: 560px) {
-  //enough room to add logo
-}
-@media only screen and (min-width: $double-panels-60-40) {
-  //split into 2 halves
-  .panel-1 {
-    width: 60%;
-  }
-  .panel-2 {
-    flex-grow: 1;
-  }
-  .panel-1 {
-    max-height: 100vh;
-    overflow-y: auto;
-  }
-  .panel-1::-webkit-scrollbar {
-    display: none;
-  }
-}
-@media only screen and (min-width: $breakpoint-5) {
-  //split into 2 halves
-  .panel-1 {
-    width: 50%;
   }
 }

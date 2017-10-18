@@ -1,5 +1,5 @@
 function getProjectNames() {
-  return fetch('http://localhost:3001/names',{
+  return fetch('http://192.168.0.11:3001/names',{
     method: 'GET'
   })
   .then((response) => {
@@ -11,7 +11,7 @@ function getProjectNames() {
   });
 }
 function getProjectOutlines() {
-  return fetch('http://localhost:3001/projects',{
+  return fetch('http://192.168.0.11:3001/projects',{
     method: 'GET'
   })
   .then((response) => {
@@ -26,7 +26,7 @@ function getProjectOutlines() {
   });
 }
 function getProject(slug) {
-  return fetch(`http://localhost:3001/projects/${slug}`,{
+  return fetch(`http://192.168.0.11:3001/projects/${slug}`,{
     method: 'GET'
   })
   .then((response) => {

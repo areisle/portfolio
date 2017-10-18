@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
-import {getProjectNames, getProjectOutlines, getProject} from './api.js';
-import { BrowserRouter, Link } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
+import {getProject} from './api.js';
+import { Link } from 'react-router-dom';
 
 class Overview extends Component {
   render() {
     let {name, category, tags, slug} = this.props.details;
-    let icons = tags.tools.map(tool => <li><Icon name={tool}></Icon></li>);
+    let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}></Icon></li>);
     return (
-      <li key={name} className="project" category={category} tools={tags.tools}>
-        <Link to={`/${slug}`}>
+      <li className="project" category={category} tools={tags.tools}>
+        <Link to={`/project/${slug}`}>
           <h2 className="title">{name}</h2>
           <ul className="icons-container">{icons}</ul>
         </Link>
@@ -57,8 +54,8 @@ class Project extends Component {
         <ul>{tools}</ul>
         <ul>{categories}</ul>
       </div>
-        <Link className="prev button" to={`/${this.props.prev}`}>prev</Link>
-        <Link className="next button" to={`/${this.props.next}`}>next</Link>
+        <Link className="prev button" to={`/project/${this.props.prev}`}>prev</Link>
+        <Link className="next button" to={`/project/${this.props.next}`}>next</Link>
       </div>
     );
     
