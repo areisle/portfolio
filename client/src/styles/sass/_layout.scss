@@ -18,6 +18,7 @@ html, body, .main {
 }
 .panel {
   width: 100%;
+  padding-bottom: $main-nav-height;
   h2 {
     margin: 1em;
   }
@@ -40,7 +41,7 @@ html, body, .main {
 }
 @media only screen and (min-width: $double-panels-60-40) {
   .panel {
-    width: 30%;
+    width: 25%;
     max-height: 100vh;
     overflow-y: auto;
     transition: width 0.3s;

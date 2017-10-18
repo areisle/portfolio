@@ -99,7 +99,7 @@ class App extends Component {
          <Route exact path='/' render={() => {
              return (
                <main className={`main view-${this.state.layout}`}>
-                  <section className="panel panel-1">
+                  <section className={`panel panel-1 ${this.state.layout === 'small' ? 'active': ''}`}>
                    <ProjectsContainer projects={this.state.projects}></ProjectsContainer>
                   </section>
                   <section className="panel panel-2">

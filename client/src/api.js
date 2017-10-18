@@ -40,4 +40,13 @@ function getProject(slug) {
     })[0];
   });
 }
-export {getProjectNames, getProjectOutlines, getProject};
+function sendEmail(data) {
+  return fetch(`http://192.168.0.11:3001/contact/`,{
+    method: 'POST',
+    body:  data
+  })
+  .then((response) => {
+    return response.json();
+  });
+}
+export {getProjectNames, getProjectOutlines, getProject, sendEmail};

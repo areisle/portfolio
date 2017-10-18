@@ -21,6 +21,7 @@
     padding: 5px 0px;
     display: flex;
     flex-wrap: wrap;
+    clear: both;
   }
 }
 .input__field {
@@ -37,11 +38,16 @@
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	-webkit-appearance: none; /* for box shadows to show on iOS */
 }
-
+.required .input__label-content::after {
+  content: " *";
+  color: red;
+}
 .input__field:focus {
 	outline: none;
 }
-
+.input {
+  clear: both;
+}
 .input__label {
 	display: inline-block;
 	float: right;
@@ -130,8 +136,8 @@
 
 .input__field--haruki:focus + .input__label--haruki::after,
 .input--filled .input__label--haruki::after {
-//	-webkit-transform: translate3d(0, 0.5em, 0);
-//	transform: translate3d(0, 0.5em, 0);
+	-webkit-transform: translate3d(0, 0.5em, 0);
+	transform: translate3d(0, 0.5em, 0);
 }
 
 textarea.input__field--haruki {
@@ -143,4 +149,30 @@ textarea.input__field--haruki {
 }
  .input__label--haruki::before {
   display: none;
+}
+
+.input--errors .input__field{
+  border: 2px dotted red;
+  ~label::before, ~label::after {
+    opacity: 0;
+  }
+}
+.input--errors textarea {
+  border-bottom: solid 4px rgba(0,0,0,0);
+}
+.input__field {
+  border: 2px dotted rgba(0,0,0,0);
+  transition: border 0.3s;
+  ~label::before, ~label::after {
+    opacity: 1;
+    transition: 0.6s;
+  }
+}
+.error-message {
+  pointer-events: none;
+  position: relative;
+  bottom: -1em;
+  font-size: 0.65em;
+  padding: 0.5em;
+  color: red;
 }

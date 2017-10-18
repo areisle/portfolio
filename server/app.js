@@ -47,30 +47,6 @@ app.listen(3001, function() {
   console.log('Example app listening on port 3001!');
 });
 
-app.post('/contact/send', function(req, res) {
-  //parse json for name, company, email, message
-  console.log('request received', req.body);
-  //parse body for details/ validate and format to send as email
-  let smtpTrans, mailOpts;
-  smtpTrans = nodemailer.createTransport({
-    service: 'Gmail', 
-    auth: {
-      user: USER,
-      pass: PASS
-    }
-  });
-  mailOpts = {
-    from: `${req.body.name} &lt;${req.body.email}&gt;`,
-    to: MTO,
-    subject: "testing 1 2 3",
-    text: req.body.message
-  };
-  smtpTrans.sendMail(mailOpts, function() {
-    res.send('success');
-  });
-  res.send(req.body);
-});
-
 app.post('/contact/', [
   check('email').isEmail()
                 .normalizeEmail(),
