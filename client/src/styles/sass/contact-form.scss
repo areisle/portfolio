@@ -78,7 +78,7 @@
 /* Haruki */
 
 .input--haruki {
-	margin: 4em 1em 1em;
+	margin: 2em 1em;
 }
 
 .input__field--haruki {
@@ -170,8 +170,8 @@ textarea.input__field--haruki {
 }
 .error-message {
   pointer-events: none;
-  position: relative;
-  bottom: -1em;
+  position: absolute;
+  bottom: -4em;
   font-size: 0.65em;
   padding: 0.5em;
   color: red;

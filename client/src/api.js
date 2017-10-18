@@ -41,9 +41,14 @@ function getProject(slug) {
   });
 }
 function sendEmail(data) {
+  console.log(data);
+  let header = new Headers();
+  header.append("Content-Type", "application/json");
   return fetch(`http://192.168.0.11:3001/contact/`,{
     method: 'POST',
-    body:  data
+    body:  JSON.stringify(data),
+    headers: new Headers({ "Content-Type": "application/json", Accept: "application/json"}),
+    mode: 'cors'
   })
   .then((response) => {
     return response.json();

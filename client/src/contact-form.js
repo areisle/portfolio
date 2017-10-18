@@ -38,7 +38,18 @@ class ContactForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('submitted');
-    sendEmail(document.getElementById('contact-form')).then(response => this.setState({ fireRedirect: true }));
+    //maybe try update/ validate fields here for autofill issues?
+    if (this.state.valid) {
+      let mail = {
+        "firstname": this.state.firstname.content,
+        "lastname" : this.state.lastname.content,
+        "company" : this.state.company.content,
+        "email" : this.state.email.content,
+        "message" : this.state.message.content,
+        "subject" : "email from contact form"
+      }
+      sendEmail(mail).then(/*response => this.setState({ fireRedirect: true })*/);
+    }
   }
   validate() {
     const fields = ['firstname', 'lastname', 'company', 'email', 'message'];
@@ -52,7 +63,9 @@ class ContactForm extends Component {
   handleBlur(event) {
     const target = event.target;
     const input = this.state[target.name];
-    input.empty = (input.content === '');
+    const content = event.target.value;
+    input.empty = (content === '');
+    input.content = content;
     input.pristine = false;
     input.errors = !this.validateItem(target.name, input.content);
     this.setState({
@@ -75,7 +88,7 @@ class ContactForm extends Component {
     ///console.log(this.props.location.state);
     return (
       <div>
-        <form className="contact-form" id="contact-form" onSubmit={this.handleSubmit} method="post">
+        <form className="contact-form" id="contact-form" disabled={this.valid} onSubmit={this.handleSubmit} method="post">
           <h2>Contact</h2>
           <input type="hidden" name="subject" value="message from contact form"/>
          <div className="row">

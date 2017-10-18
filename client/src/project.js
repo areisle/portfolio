@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getProject} from './api.js';
+//import {getProject} from './api.js';
 import { Link } from 'react-router-dom';
 
 class Overview extends Component {
@@ -32,14 +32,14 @@ class Project extends Component {
     this.update();
   }
   update() {
-    getProject(this.props.slug).then(data => {
-      this.setState({
-        name: data.name,
-        slug: data.slug,
-        tools: data.tags.tools,
-        categories: data.category
-      });
-    });
+//    getProject(this.props.slug).then(data => {
+//      this.setState({
+//        name: data.name,
+//        slug: data.slug,
+//        tools: data.tags.tools,
+//        categories: data.category
+//      });
+//    });
   }
   componentDidUpdate() {
     this.update();

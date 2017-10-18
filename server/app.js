@@ -10,7 +10,8 @@ const { matchedData, sanitize } = require('express-validator/filter');
 const {MUSER, MPASS, DBUSER, DBPASS, DBHOST, DB, MTO} = process.env
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(expressValidator());
 
 let connection = mysql.createConnection({
@@ -62,7 +63,9 @@ app.post('/contact/', [
                   .trim()
                   .escape()
 ], (req, res, next) => {
+  console.log(req.body);
   const errors = validationResult(req);
+  console.log(errors);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
@@ -82,9 +85,9 @@ app.post('/contact/', [
     subject: data.subject,
     text: `FROM: ${data.firstname} ${data.lastname} \<${data.email}\> \n ${data.message}`
   };
-//  smtpTrans.sendMail(mailOpts, function() {
-//    res.send('success');
-//  });
+  smtpTrans.sendMail(mailOpts, function() {
+    res.send('success');
+  });
 });
 
 function getProjectOutlines() {
