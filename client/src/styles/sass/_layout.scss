@@ -3,8 +3,11 @@
   justify-content: space-around;
 }
 .view-small {
-  .panel:not(.active) {
+  .panel.inactive {
     display: none;
+  }
+  .about, .contact-form {
+    margin: 0 auto;
   }
 }
 html, body, .main {
@@ -41,17 +44,19 @@ html, body, .main {
 }
 @media only screen and (min-width: $double-panels-60-40) {
   .panel {
-    width: 25%;
+    width: 50%;
     max-height: 100vh;
     overflow-y: auto;
-    transition: width 0.3s;
-    flex-grow: 1;
-    transition: flex-grow 0.3s;
+    flex-grow: 0;
+    transition: width 0.3s, background 0.7s;
   }
-  
+  .panel.inactive {
+    width: 30%;
+  }
   .panel.active {
     flex-grow: 4;
     display: flex;
+    justify-content: space-evenly;
   }
 }
 @media only screen and (min-width: $breakpoint-5) {
@@ -63,6 +68,5 @@ html, body, .main {
 
 .about {
   max-width: 300px;
-  margin: 0 auto;
   padding: 20px;
 }

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 //import {getProject} from './api.js';
 import { Link } from 'react-router-dom';
+//import ReactResizeDetector from 'react-resize-detector';
 
 class Overview extends Component {
   render() {
     let {name, category, tags, slug} = this.props.details;
     let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}></Icon></li>);
     return (
-      <li className="project" category={category} tools={tags.tools}>
+      <li className="project" category={category} tools={tags.tools} >
         <Link to={`/project/${slug}`}>
           <h2 className="title">{name}</h2>
           <ul className="icons-container">{icons}</ul>

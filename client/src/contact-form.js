@@ -87,8 +87,8 @@ class ContactForm extends Component {
     //const { from } = this.props.location.state || '/';
     ///console.log(this.props.location.state);
     return (
-      <div>
-        <form className="contact-form" id="contact-form" disabled={this.valid} onSubmit={this.handleSubmit} method="post">
+      <div className="contact-form" id="contact-form">
+        <form disabled={this.valid} onSubmit={this.handleSubmit} method="post">
           <h2>Contact</h2>
           <input type="hidden" name="subject" value="message from contact form"/>
          <div className="row">
