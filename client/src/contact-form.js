@@ -47,7 +47,7 @@ class ContactForm extends Component {
         "email" : this.state.email.content,
         "message" : this.state.message.content,
         "subject" : "email from contact form"
-      }
+      };
       sendEmail(mail).then(/*response => this.setState({ fireRedirect: true })*/);
     }
   }
@@ -91,12 +91,12 @@ class ContactForm extends Component {
         <form disabled={this.valid} onSubmit={this.handleSubmit} method="post">
           <h2>Contact</h2>
           <input type="hidden" name="subject" value="message from contact form"/>
-         <div className="row">
+          <div className="row">
             <Input name="First Name" slug="firstname" value={firstname}  required={true} change={this.handleChange} blur={this.handleBlur} error="First Name Must be at least 2 Characters and contain only letters"></Input>
             <Input name="Last Name" slug="lastname" value={lastname}  required={true} change={this.handleChange} blur={this.handleBlur} error="Last Name Must be at least 2 Characters and contain only letters"></Input>
           </div>
           <div className="row">
-           <Input name="Company" slug="company" value={company} change={this.handleChange} blur={this.handleBlur} error="Company Name may only contain letters and numbers"></Input>
+            <Input name="Company" slug="company" value={company} change={this.handleChange} blur={this.handleBlur} error="Company Name may only contain letters and numbers"></Input>
           </div>
           <div className="row">
             <Input name="Email" slug="email" value={email}  required={true} change={this.handleChange} blur={this.handleBlur} error="Must Be a Valid Email Address"></Input>
@@ -106,11 +106,11 @@ class ContactForm extends Component {
           </div>
           <div className="row">
             <input className={``} 
-                   type="submit" 
-                   id="submit" 
-                   name="submit" 
-                   value="send"
-                   disabled={this.valid}/>
+              type="submit" 
+              id="submit" 
+              name="submit" 
+              value="send"
+              disabled={this.valid}/>
           </div>
         </form>
         {fireRedirect && (
@@ -124,11 +124,11 @@ function Textarea(props) {
   return (
     <span className={`input input--haruki ${props.required ? "required": "optional"} ${(props.value.empty && !props.value.errors) ? "":"input--filled"} ${props.value.errors ? "input--errors":""}`}>
       <textarea className={`input__field input__field--haruki `} 
-             type="text" id={props.slug} 
-             name={props.slug} 
-             value={props.value.content} 
-             onChange={props.change}
-             onBlur={props.blur}></textarea>
+        type="text" id={props.slug} 
+        name={props.slug} 
+        value={props.value.content} 
+        onChange={props.change}
+        onBlur={props.blur}></textarea>
       <label className="input__label input__label--haruki" htmlFor={props.slug}>
         <span className="input__label-content input__label-content--haruki">{props.name}</span>
       </label>
@@ -140,11 +140,11 @@ function Input(props) {
   return (
     <span className={`input input--haruki ${props.required ? "required": "optional"} ${(props.value.empty && !props.value.errors) ? "":"input--filled"} ${props.value.errors ? "input--errors":""}`}>
       <input className={`input__field input__field--haruki `} 
-             type="text" id={props.slug} 
-             name={props.slug} 
-             value={props.value.content} 
-             onChange={props.change}
-             onBlur={props.blur}/>
+        type="text" id={props.slug} 
+        name={props.slug} 
+        value={props.value.content} 
+        onChange={props.change}
+        onBlur={props.blur}/>
       <label className="input__label input__label--haruki" htmlFor={props.slug}>
         <span className="input__label-content input__label-content--haruki">{props.name}</span>
       </label>
@@ -155,7 +155,7 @@ function Input(props) {
 
 function Error(props) {
   if (props.show) {
-    return (<p className="error-message">{props.message}</p>)
+    return (<p className="error-message">{props.message}</p>);
   }
   return null;
 }

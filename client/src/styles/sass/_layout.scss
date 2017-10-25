@@ -13,6 +13,9 @@
 html, body, .main {
   margin: 0;
   padding: 0;
+  
+}
+html, body {
   width: 100%;
   min-height: 100vh;
 }
@@ -39,9 +42,6 @@ html, body, .main {
   margin-bottom: $main-nav-height;
 }
 
-@media only screen and (min-width: 560px) {
-  //enough room to add logo
-}
 @media only screen and (min-width: $double-panels-60-40) {
   .panel {
     width: 50%;
@@ -59,14 +59,53 @@ html, body, .main {
     justify-content: space-evenly;
   }
 }
-@media only screen and (min-width: $breakpoint-5) {
-  //split into 2 halves
-//  .panel-1, .panel-2 {
-//    width: 50%;
-//  }
-}
 
 .about {
   max-width: 300px;
   padding: 20px;
+}
+
+.view-small {
+    .header-nav {
+    height: $main-nav-height;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    .main-nav {
+      height: 100%;
+      width: 100%;
+      max-width: 500px;
+    }
+    h1, h2 {
+      //display only logo here
+      padding: 0;
+      margin: 0;
+      width: 60px;
+      display: none;
+    }
+    ul {
+      @include clean-list();
+      display: flex;
+      height: 100%;
+    }
+    li {
+      width: 100%;
+      height: 100%;
+    }
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include testing(blue);
+      height: 100%;
+      background: lightgray;
+    }
+    a {
+      width: 100%;
+      text-decoration: none;
+    }
+  }
 }

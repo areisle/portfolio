@@ -10,7 +10,6 @@ const { matchedData, sanitize } = require('express-validator/filter');
 const {MUSER, MPASS, DBUSER, DBPASS, DBHOST, DB, MTO} = process.env
 
 app.use(cors());
-//app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressValidator());
 
@@ -23,11 +22,22 @@ let connection = mysql.createConnection({
 
 connection.connect();
 
-app.get('/names/', function(req, res) {
-  let names = getAllNames();
-  names.then(results => res.send(results));
-  
-});
+const getProjectOutlines = () => {
+  return new Promise(function (resolve, reject) {
+    connection.query('SELECT name, slug, category, tags FROM Projects', function(err, results) {
+      resolve(results);
+    });
+  });
+};
+
+const getProject = (name) => {
+  return new Promise(function (resolve, reject) {
+    let query = `SELECT * FROM Projects WHERE slug="${name}"`
+    connection.query(query, function(err, results) {
+      resolve(results);
+    });
+  });
+};
 
 app.get('/projects/', function(req, res) {
   //returns all project oulines (name, categories, tags etc.)
@@ -38,14 +48,10 @@ app.get('/projects/', function(req, res) {
 });
 
 app.get('/projects/:projectName', function(req, res) {
-  //returns all project oulines (name, categories, tags etc.)
+  //returns all data for specified project 
   let project = getProject(req.params.projectName);
   project.then(results => res.send(results));
   
-});
-
-app.listen(3001, function() {
-  console.log('Example app listening on port 3001!');
 });
 
 app.post('/contact/', [
@@ -90,30 +96,8 @@ app.post('/contact/', [
   });
 });
 
-function getProjectOutlines() {
-  return new Promise(function (resolve, reject) {
-    connection.query('SELECT name, slug, category, tags FROM Projects', function(err, results) {
-      resolve(results);
-    });
-  });
-}
-
-function getAllNames() {
-  return new Promise(function (resolve, reject) {
-    connection.query('SELECT name FROM Projects', function(err, results) {
-      resolve(results);
-    });
-  });
-}
-
-function getProject(name) {
-  return new Promise(function (resolve, reject) {
-    let query = `SELECT * FROM Projects WHERE slug="${name}"`
-    connection.query(query, function(err, results) {
-      resolve(results);
-    });
-  });
-}
+app.listen(3001, function() {
+});
 
 const cleanup = (msg='') => {
    console.log('cleaning up', msg);
@@ -123,3 +107,5 @@ const cleanup = (msg='') => {
 };
 process.on('SIGINT', cleanup);
 process.on('uncaughtException', cleanup);
+
+module.exports = app;

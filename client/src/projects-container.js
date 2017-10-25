@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Overview } from './project.js'
-import {getProjectNames, getProjectOutlines} from './api.js';
+import { Overview } from './project.js';
+import { getProjectOutlines } from './api.js';
 import ReactResizeDetector from 'react-resize-detector';
 
 //list of projects
@@ -9,15 +9,9 @@ class ProjectsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      names: [],
       projects: [],
       columns: 1
-    }
-    getProjectNames().then(data => {
-      this.setState({
-        names: data,
-      });
-    });
+    };
     getProjectOutlines().then(data => {
       this.setState({
         projects: data,
@@ -49,10 +43,10 @@ class ProjectsContainer extends Component {
       return (<Overview key={project.slug} details={project}></Overview>);
     });
     return (
-        <ul className={`projects-container columns-${this.state.columns}`} >
-          {projects}
-          <ReactResizeDetector handleWidth={true} onResize={this.updateLayout}></ReactResizeDetector>
-        </ul>
+      <ul className={`projects-container columns-${this.state.columns}`} >
+        {projects}
+        <ReactResizeDetector handleWidth={true} onResize={this.updateLayout}></ReactResizeDetector>
+      </ul>
     );
   }
 }
