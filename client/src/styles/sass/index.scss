@@ -1,19 +1,18 @@
-@import "functions";
-@import "variables";
-@import "layout";
-@import "project";
-@import "icons";
-@import url('https://fonts.googleapis.com/css?family=Buda:300|Heebo:100|Italiana|Tenor+Sans|Uncial+Antiqua');
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
-//  font-family: 'Tenor Sans', sans-serif;
-//font-family: 'Italiana', serif; //okay, but not my favourite
-//font-family: 'Uncial Antiqua', cursive; //just awful 0/10
-font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
-//font-family: 'Buda', cursive; 2/10
-//  text-transform: uppercase;
+  font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
   font-weight: 500;
 }
+
+@import "functions";
+@import "variables";
+@import "layout";
+@import "page_transitions";
+@import "header-nav";
+@import "project-container";
+@import "project";
+@import "icons";
+@import url('https://fonts.googleapis.com/css?family=Buda:300|Heebo:100|Italiana|Tenor+Sans|Uncial+Antiqua');

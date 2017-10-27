@@ -7,7 +7,9 @@
 }
 
 @mixin centre() {
-    @include flex(row, center, center, nowrap);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @mixin full-size() {
@@ -19,44 +21,7 @@
     list-style: none;
     padding: 0;
     margin: 0 auto;
-}
-
-
-//get rid of these later
-//https://css-tricks.com/snippets/sass/mixin-prefix-properties/
-/// Mixin to prefix a property
-/// @author Hugo Giraudel
-/// @param {String} $property - Property name
-/// @param {*} $value - Property value
-/// @param {List} $prefixes (()) - List of prefixes to print
-@mixin prefix($property, $value, $prefixes: ()) {
-  @each $prefix in $prefixes {
-    #{'-' + $prefix + '-' + $property}: $value;
-  }
- 
-  // Output standard non-prefixed declaration
-  #{$property}: $value;
-}
-
-@mixin prefix-v($property, $value, $prefixes: ()) {
-  @each $prefix in $prefixes {
-      #{$property}: #{'-' + $prefix + '-' + $value};
-  }
- 
-  // Output standard non-prefixed declaration
-  #{$property}: $value;
-}
-
-//vars: flex-direction, justify-content, align-content, flex-wrap=wrap
-@mixin flex($dir, $justify, $align-content, $wrap) {
-    @include prefix-v(display, flex, webkit);
-    @include prefix(justify-content, $justify, webkit);
-    @include prefix(align-content, $align-content, webkit);
-    @include prefix(align-items, $align-content, webkit);
-    @include prefix(flex-direction, $dir, webkit);
-    @include prefix(flex-wrap, $wrap, webkit);
-}
-
-@mixin flex-d() {
-    @include prefix-v(display, flex, webkit);
+    a {
+        text-decoration: none;
+    }
 }

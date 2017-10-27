@@ -1,111 +1,123 @@
-.view-wide {
-  display: flex;
-  justify-content: space-around;
-}
-.view-small {
-  .panel.inactive {
-    display: none;
-  }
-  .about, .contact-form {
-    margin: 0 auto;
-  }
-}
-html, body, .main {
+
+html, body {
   margin: 0;
   padding: 0;
-  
-}
-html, body {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
 }
-.main {
-  @include testing(purple);
-}
-.panel {
-  width: 100%;
-  padding-bottom: $main-nav-height;
-  h2 {
-    margin: 1em;
-  }
-}
+
 *::-webkit-scrollbar {
   display: none;
 }
-.panel-2 {
-  @include testing(green);
-}
-.panel-1 {
+
+.main-nav {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  pointer-events: none;
   @include testing(orange);
-}
-.panel > *:last-child {
-  margin-bottom: $main-nav-height;
-}
-
-@media only screen and (min-width: $double-panels-60-40) {
-  .panel {
-    width: 50%;
-    max-height: 100vh;
-    overflow-y: auto;
-    flex-grow: 0;
-    transition: width 0.3s, background 0.7s;
+  a {
+    @include testing(green);
+    @include full-size();
+    @include centre();
+    z-index: 10;
+    pointer-events: all;
   }
-  .panel.inactive {
-    width: 30%;
+  ul {
+    @include clean-list();
   }
-  .panel.active {
-    flex-grow: 4;
-    display: flex;
-    justify-content: space-evenly;
+  li {
+    height: 100%;
   }
 }
-
-.about {
-  max-width: 300px;
-  padding: 20px;
+.header-nav, .main {
+  @include testing();
+}
+.main {
+  position: relative;
 }
 
 .view-small {
-    .header-nav {
+  //show nav at bottom
+  .main {
+    margin-bottom: $main-nav-height;
+  }
+  .main-nav {
+    z-index: 10;
+    
     height: $main-nav-height;
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
-    z-index: 1000;
-    display: flex;
-    justify-content: flex-end;
-    .main-nav {
-      height: 100%;
-      width: 100%;
-      max-width: 500px;
-    }
-    h1, h2 {
-      //display only logo here
-      padding: 0;
-      margin: 0;
-      width: 60px;
-      display: none;
-    }
     ul {
-      @include clean-list();
       display: flex;
       height: 100%;
     }
     li {
-      width: 100%;
-      height: 100%;
+      width: 50%;
+      z-index: 10;
     }
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      @include testing(blue);
-      height: 100%;
-      background: lightgray;
-    }
-    a {
-      width: 100%;
-      text-decoration: none;
+    span {
+      letter-spacing: 0.7em;
     }
   }
+}
+
+.view-wide {
+  //show nav on either side?
+  >div, .header-nav {
+    margin: 0 $main-nav-button-width;
+  }
+  .main-nav {
+    height: 100vh;
+    li {
+      position: absolute;
+      width: $main-nav-button-width;
+      span {
+        letter-spacing: 1em;
+      }
+    }
+    li:first-of-type {
+      left: 0px;
+      span {
+        transform: rotate(-90deg);
+      }
+    }
+    li:last-of-type {
+      right: 0px;
+      span {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+.main-title {
+  height: $main-title-height;
+}
+.app-wrapper > div {
+  position: relative;
+}
+.view-wide .app-wrapper > div {
+  width: calc(100% - 2 * #{$main-nav-button-width});
+}
+
+.main-title {
+  transition: opacity 1s;
+}
+.home {
+  .header-nav .hide {
+    display: none;
+    opacity: 0;
+  }
+  .main {
+    width: 100%;
+    height: 100vh;
+    @include centre();
+    flex-direction: column;
+  }
+}
+.view-wide .main-title {
+  position: fixed;
+  z-index: 10;
+}
+.view-wide:not(.home) .main {
+  margin-top: $main-title-height;
 }

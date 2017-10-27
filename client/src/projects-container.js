@@ -12,13 +12,10 @@ class ProjectsContainer extends Component {
       projects: [],
       columns: 1
     };
-    getProjectOutlines().then(data => {
-      this.setState({
-        projects: data,
-      });
-    });
+    
     this.updateLayout = this.updateLayout.bind(this);
   }
+  
   updateLayout(width) {
     const oldcolumns = this.state.columns;
     let newcolumns = oldcolumns;
@@ -37,6 +34,13 @@ class ProjectsContainer extends Component {
         columns: newcolumns,
       });
     }
+  }
+  componentDidMount() {
+    getProjectOutlines().then(data => {
+      // this.setState({
+      //   projects: data,
+      // });
+    });
   }
   render () {
     let projects = this.props.projects.map(project => {

@@ -4,3 +4,4 @@ client/src/images/*
 *.sql
 */.nyc_output/*
 */coverage/*
+*/db.js

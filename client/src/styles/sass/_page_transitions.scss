@@ -1,0 +1,34 @@
+.main {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter.fade-enter-active {
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit.fade-exit-active {
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.main-nav span {
+    transition: 0.5s;
+}
+.view-wide .main-nav .active {
+    span {
+        letter-spacing: 2.5em;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+}
+.view-small .main-nav .active {
+    span {
+        font-weight: bold;
+    }
+}

@@ -15,17 +15,17 @@ $breakpoint-5: 1800px;
 ---------------------*/
 $navy: rgb(100, 100, 255);
 $bg-project-container: rgb(240, 240, 240);
-
+$next-prev-border: rgb(216, 214, 214);
 
 /*-------------------
    Component Sizes    
 ---------------------*/
 $main-nav-height: 60px;
-
+$main-nav-button-width: 60px;
 $next-prev-btn-width: 40px;
-
+$main-title-height: 120px;
 
 /*-------------------
   Development Only    
 ---------------------*/
-$testing: true;
+$testing: false;
