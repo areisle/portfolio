@@ -5,3 +5,4 @@ client/src/images/*
 */.nyc_output/*
 */coverage/*
 */db.js
+node_modules/

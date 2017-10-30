@@ -4,7 +4,7 @@
  * @returns {Promise} 
  */
 const getProjectOutlines = () => {
-  return fetch('http://192.168.0.11:3001/projects', {
+  return fetch('http://localhost:3001/projects', {
     method: 'GET'
   })
     .then((response) => {
@@ -34,7 +34,7 @@ const getProjectOutlines = () => {
  * @returns {Promise} 
  */
 const getProject = (slug) => {
-  return fetch(`http://192.168.0.11:3001/projects/${slug}`, {
+  return fetch(`http://localhost:3001/projects/${slug}`, {
     method: 'GET'
   })
     .then((response) => {
@@ -60,7 +60,7 @@ const getProject = (slug) => {
 const sendEmail = (data) => {
   let header = new Headers();
   header.append("Content-Type", "application/json");
-  fetch(`http://192.168.0.11:3001/contact/`, {
+  fetch(`http://localhost:3001/contact/`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: new Headers({

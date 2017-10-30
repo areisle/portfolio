@@ -43,19 +43,43 @@ class Project extends Component {
     let categories = this.state.categories.map(tool => (<li key={tool}>{tool}</li>));
     return (
       <div className="project single">
-        <div className="project-overview">
+        <nav className="project-nav">
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#hightlights">Highlights</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#critique">Critique</a></li>
+          </ul>
+        </nav>
+        <section className="project-overview" id="overview">
           <h2 className="project-title">{this.state.name}</h2>
-          <nav className="project-nav">
-            <ul>
-              <li><a href="#overview">Overview</a></li>
-              <li><a href="">Highlights</a></li>
-              <li><a href="">Gallery</a></li>
-              <li><a href="">Critique</a></li>
-            </ul>
-          </nav>
-          <ul>{tools}</ul>
-          <ul>{categories}</ul>
-        </div>
+          <ul className="project-tools">{tools}</ul>
+          <ul className="project-categories">{categories}</ul>
+          <ul className="project-external-links">
+            <li><a href="https://github.com/areisle">view on github</a></li>
+            <li><a href="#">view live</a></li>
+          </ul>
+        </section>
+        <section className="project-highlights" id="hightlights">
+          <h2>Hightlights</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+        </section>
+        <section className="project-gallery" id="gallery">
+          <h2>Gallery</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+
+        </section>
+        <section className="project-critique" id="critique">
+          <h2>Critique</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, eum culpa voluptatem beatae expedita.</p>
+        </section>
+
         <Link className="prev button" to={`/portfolio/${this.props.prev}`}></Link>
         <Link className="next button" to={`/portfolio/${this.props.next}`}></Link>
       </div>

@@ -64,7 +64,7 @@ html, body {
 .view-wide {
   //show nav on either side?
   >div, .header-nav {
-    margin: 0 $main-nav-button-width;
+    margin: 0 calc(#{$main-nav-button-width} + #{$next-prev-btn-width});
   }
   .main-nav {
     height: 100vh;
@@ -104,7 +104,7 @@ html, body {
 }
 .home {
   .header-nav .hide {
-    display: none;
+    visibility: hidden;
     opacity: 0;
   }
   .main {

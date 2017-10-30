@@ -50,13 +50,15 @@
   }
 }
 
-.project-nav {
-  ul {
-    @include clean-list();
-  }
+.project-external-links, .project-tools, .project-categories, .project-nav ul {
+  @include clean-list();
 }
 
-
+.project-nav {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
 //if grid isn't supported, do this
 //@supports not (display: grid) {
 //    @media only screen and (min-width: $breakpoint-1) {
