@@ -6,3 +6,6 @@ client/src/images/*
 */coverage/*
 */db.js
 node_modules/
+package-lock.json
+*/package-lock.json
+*/build/*
