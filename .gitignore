@@ -1,7 +1,6 @@
 *.css
 !normalize.css
 */node_modules/*
-client/src/images/*
 *.sql
 */.nyc_output/*
 */coverage/*
