@@ -6,6 +6,9 @@
   "dependencies": {
     "concurrently": "^3.5.0"
   },
+  "engines": {
+    "node": "8.8.1"
+  },
   "devDependencies": {
     "eslint": "^4.10.0",
     "eslint-config-google": "^0.9.1",
@@ -20,7 +23,8 @@
     "install": "(cd client && install) && (cd server && install)",
     "start-prod": "cd server && npm run start-prod",
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
-    "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\""
+    "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
