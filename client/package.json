@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "react-scripts test --env=jsdom",
-    "build-css": "node-sass-chokidar src/styles/sass/ -o src/styles/",
+    "build-css": "node-sass-chokidar src/styles/sass/ -o src/styles/ --recursive",
     "watch-css": "node-sass-chokidar src/styles/sass/ -o src/styles/ --watch --recursive",
     "start": "react-scripts start",
     "build": "(npm run build-css) && (react-scripts build)",
@@ -26,6 +26,5 @@
   "devDependencies": {
     "eslint": "^4.9.0",
     "eslint-plugin-react": "^7.4.0",
-    "react-scripts": "^1.0.14"
   }
 }
