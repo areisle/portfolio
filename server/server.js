@@ -76,7 +76,9 @@ router.post('/contact/', [
 
 app.use(router);
 app.use('/*', staticFiles);
-app.listen(3001, function () {
+
+app.set('port', (process.env.PORT || 3001));
+app.listen(process.env.PORT || 3001, function () {
 });
 
 module.exports = app;
