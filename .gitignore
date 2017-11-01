@@ -4,7 +4,6 @@
 *.sql
 */.nyc_output/*
 */coverage/*
-*/db.js
 node_modules/
 package-lock.json
 */package-lock.json
