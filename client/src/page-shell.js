@@ -9,5 +9,5 @@ const MainShell = (Page, myprops) => {
       <Page {...props} {...myprops}/>
     </main>
   );
-}
+};
 export default MainShell;
