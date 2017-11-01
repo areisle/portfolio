@@ -20,7 +20,7 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
-    "install": "(npm install) && (cd client && npm install) && (cd server && npm install)",
+    "install": "(cd client && npm install) && (cd server && npm install)",
     "start-prod": "cd server && npm run start-prod",
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
