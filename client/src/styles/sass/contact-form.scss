@@ -1,0 +1,154 @@
+//about section
+
+
+
+//styles modified from some found on https://tympanus.net/codrops/2015/01/08/inspiration-text-input-effects/
+.input {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 150px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  vertical-align: top;
+  clear: both;
+  margin: 2em 1em 3em;
+}
+.contact-form {
+  max-width: 600px;
+  padding: 20px;
+  .row {
+    padding: 5px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    clear: both;
+  }
+}
+.input__field {
+	position: relative;
+	display: block;
+	float: right;
+	border: none;
+	border-radius: 0;
+	color: #aaa;
+	font-weight: bold;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	-webkit-appearance: none; /* for box shadows to show on iOS */
+    padding: 0.4em 0.25em;
+	width: 100%;
+	background: transparent;
+	color: #AFB5BB;
+	font-size: 1.55em;
+}
+.required .input__label-content::after {
+  content: " *";
+  color: red;
+}
+.input__field:focus {
+	outline: none;
+}
+.input__label {
+	float: right;
+	padding: 0 1em;
+	width: 40%;
+	color: #6a7989;
+	font-weight: bold;
+	font-size: 70.25%;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    position: absolute;
+	width: 100%;
+	text-align: left;
+	pointer-events: none;
+}
+
+.input__label-content {
+	position: relative;
+	display: block;
+	padding: 1.6em 0;
+	width: 100%;
+    -webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.input__label::before,
+.input__label::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	z-index: -1;
+	width: 100%;
+	height: 4px;
+	background: #6a7989;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.input__label::before {
+	top: 0;
+}
+
+.input__label::after {
+	bottom: 0;
+}
+
+.input__field:focus + .input__label .input__label-content,
+.input--filled .input__label-content {
+	-webkit-transform: translate3d(0, -90%, 0);
+	transform: translate3d(0, -90%, 0);
+}
+
+.input__field:focus + .input__label::before,
+.input--filled .input__label::before {
+	-webkit-transform: translate3d(0, -0.5em, 0);
+	transform: translate3d(0, -0.5em, 0);
+}
+
+.input__field:focus + .input__label::after,
+.input--filled .input__label::after {
+	-webkit-transform: translate3d(0, 0.5em, 0);
+	transform: translate3d(0, 0.5em, 0);
+}
+
+textarea.input__field {
+  min-height: 200px;
+  border-bottom: solid 4px #6a7989;
+  ~.input__label--haruki::after {
+    display: none;
+  }
+}
+ .input__label::before {
+  display: none;
+}
+
+.input--errors .input__field{
+  border: 2px dotted red;
+  ~label::before, ~label::after {
+    opacity: 0;
+  }
+}
+.input--errors textarea {
+  border-bottom: solid 4px rgba(0,0,0,0);
+}
+.input__field {
+  border: 2px dotted rgba(0,0,0,0);
+  transition: border 0.3s;
+  ~label::before, ~label::after {
+    opacity: 1;
+    transition: 0.6s;
+  }
+}
+.error-message {
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  font-size: 0.65em;
+  padding: 0.25em;
+  color: red;
+}

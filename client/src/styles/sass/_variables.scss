@@ -1,0 +1,31 @@
+
+/*-------------------
+      Layout     
+---------------------*/
+$breakpoint-0: 400px;
+$breakpoint-1: 500px;
+$breakpoint-2: 600px;
+$breakpoint-3: 800px;
+$breakpoint-4: 1200px;
+$double-panels-60-40: 1200px;
+$breakpoint-5: 1800px;
+
+/*-------------------
+      Colours     
+---------------------*/
+$navy: rgb(100, 100, 255);
+$bg-project-container: rgb(240, 240, 240);
+$next-prev-border: rgb(216, 214, 214);
+
+/*-------------------
+   Component Sizes    
+---------------------*/
+$main-nav-height: 60px;
+$main-nav-button-width: 60px;
+$next-prev-btn-width: 40px;
+$main-title-height: 120px;
+
+/*-------------------
+  Development Only    
+---------------------*/
+$testing: false;

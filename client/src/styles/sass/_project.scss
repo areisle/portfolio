@@ -1,0 +1,86 @@
+@import "functions";
+@import "variables";
+
+.project {
+  @include testing();
+  //background: $bg-project-container;
+  transition: 1s;
+}
+
+//main project grid
+
+
+
+.project.single {
+  //styles for next prev buttons
+  @media only screen and (min-width: $double-panels-60-40) {
+    position: relative;
+    min-height: 100vh;
+  }
+}
+
+.prev, .next {
+  display: block;
+  height: 40px;
+  @include testing(black);
+}
+.view-wide {
+  .project.single {
+    margin: 0 $next-prev-btn-width;
+  }
+  .prev, .next {
+    position: fixed;
+    width: $next-prev-btn-width;
+    height: 100vh;
+    top: 0px;
+    @include centre();
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-left: 1px solid $next-prev-border;
+    border-right: 1px solid $next-prev-border;
+  }
+  .prev {
+    left: $main-nav-button-width;
+    background-image: url('../images/icons/back.svg');
+  }
+  .next {
+    right: $main-nav-button-width;
+    background-image: url('../images/icons/next.svg');
+  }
+}
+
+.project-external-links, .project-tools, .project-categories, .project-nav ul {
+  @include clean-list();
+}
+
+.project-nav {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+//if grid isn't supported, do this
+//@supports not (display: grid) {
+//    @media only screen and (min-width: $breakpoint-1) {
+//       .projects {
+//            @include flex(row, flex-start, flex-start, wrap);
+//            //background-color: transparent;
+//            .project {
+//                width: calc((100% - 40px) / 3);
+//                margin: 0;
+//                max-height: 300px;
+//            }
+//            .project:nth-of-type(1),
+//            .project:nth-of-type(2),
+//            .project:nth-of-type(4),
+//            .project:nth-of-type(5) {
+//               margin-right: 20px;
+//            }
+//            .project:nth-of-type(1),
+//            .project:nth-of-type(2),
+//            .project:nth-of-type(3) {
+//               margin-bottom: 20px;
+//            }
+//        } 
+//    }
+//}
