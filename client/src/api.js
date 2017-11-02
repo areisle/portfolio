@@ -21,7 +21,9 @@ const getProjectOutlines = () => {
           category,
           slug
         } = project;
+        console.log(tags);
         tags = JSON.parse(tags);
+        console.log(tags);
         category = JSON.parse(category);
         return {
           name,
