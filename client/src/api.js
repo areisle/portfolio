@@ -1,6 +1,6 @@
 const port = process.env.PORT || '3001';
+console.log('portnumber is:', process.env.port);
 const env = process.env.NODE_ENV;
-console.log(env);
 const url = env!=='development'?`https://areisle-portfolio.herokuapp.com/${port}`:'http://localhost:3001';
 /**
  * get all of the projects with there basic info such 
@@ -21,9 +21,9 @@ const getProjectOutlines = () => {
           category,
           slug
         } = project;
-        console.log(tags);
+        console.log("tags:", tags);
         tags = JSON.parse(tags);
-        console.log(tags);
+        console.log("tags:", tags);
         category = JSON.parse(category);
         return {
           name,
