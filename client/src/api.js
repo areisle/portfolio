@@ -1,10 +1,14 @@
+const port = process.env.PORT || '3001';
+const env = process.env.NODE_ENV;
+console.log(env);
+const url = env!=='development'?`https://areisle-portfolio.herokuapp.com/${port}`:'http://localhost:3001';
 /**
  * get all of the projects with there basic info such 
  * as Name, tools, subtitle, category, slug etc.
  * @returns {Promise} 
  */
 const getProjectOutlines = () => {
-  return fetch('http://localhost:3001/projects', {
+  return fetch(`${url}/projects`, {
     method: 'GET'
   })
     .then((response) => {
@@ -34,7 +38,7 @@ const getProjectOutlines = () => {
  * @returns {Promise} 
  */
 const getProject = (slug) => {
-  return fetch(`http://localhost:3001/projects/${slug}`, {
+  return fetch(`${url}/projects/${slug}`, {
     method: 'GET'
   })
     .then((response) => {
@@ -60,7 +64,7 @@ const getProject = (slug) => {
 const sendEmail = (data) => {
   let header = new Headers();
   header.append("Content-Type", "application/json");
-  fetch(`http://localhost:3001/contact/`, {
+  fetch(`${url}/contact/`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: new Headers({
