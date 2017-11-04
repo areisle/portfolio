@@ -7,8 +7,12 @@ let connection = mysql.createConnection({
   password: DBPASS,
   database: DB
 });
+try {
+  connection.connect();
+} catch (error) {
+  console.log('db connection error', error);
+}
 
-connection.connect();
 let db = {};
 db.getProjectOutlines = () => {
   return new Promise(function (resolve, reject) {
