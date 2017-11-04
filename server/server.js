@@ -23,7 +23,8 @@ router.get('/projects/', function (req, res) {
   // returns all project oulines (name, categories, tags etc.)
   res.set('Content-Type', 'application/json');
   let outlines = db.getProjectOutlines();
-  outlines.then(results => res.send(results));
+  outlines.then(results => res.send(results))
+    .catch(error => console.log('db error: ', error));
 });
 
 router.get('/projects/:projectName', function (req, res) {
