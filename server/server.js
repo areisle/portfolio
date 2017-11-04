@@ -47,7 +47,7 @@ router.post('/contact/', [
     .trim()
     .escape()
 ], (req, res, next) => {
-  console.log(req.body);
+  console.log('console.log request body is:', req.body);
   const errors = validationResult(req);
   console.log(errors);
   if (!errors.isEmpty()) {
