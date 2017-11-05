@@ -19,6 +19,7 @@ db.getProjectOutlines = () => {
     connection.query('SELECT name, slug, category, tags FROM Projects', function (err, results) {
       if (err) {
         console.log('db error:', err);
+        reject(err);
       } else {
         resolve(results);
       }
@@ -32,6 +33,7 @@ db.getProject = (name) => {
     connection.query(query, function (err, results) {
       if (err) {
         console.log('db error:', err);
+        reject(err);
       } else {
         resolve(results);
       }
