@@ -1,25 +1,21 @@
 const mysql = require('mysql');
 const {DBUSER, DBPASS, DBHOST, DB} = process.env;
 
-let connection = mysql.createConnection({
+let connection = mysql.createPool({
+  connectionLimit: 4,
   host: DBHOST,
   user: DBUSER,
   password: DBPASS,
   database: DB
 });
-try {
-  connection.connect();
-} catch (error) {
-  console.log('db connection error', error);
-}
 
 let db = {};
 db.getProjectOutlines = () => {
   return new Promise(function (resolve, reject) {
-    connection.query('SELECT name, slug, category, tags FROM Projects', function (err, results) {
-      if (err) {
-        console.log('db error:', err);
-        reject(err);
+    connection.query('SELECT name, slug, category, tags FROM Projects', function (error, results) {
+      if (error) {
+        console.log('db error:', error);
+        reject(error);
       } else {
         resolve(results);
       }
@@ -30,10 +26,10 @@ db.getProjectOutlines = () => {
 db.getProject = (name) => {
   return new Promise(function (resolve, reject) {
     let query = `SELECT * FROM Projects WHERE slug="${name}"`;
-    connection.query(query, function (err, results) {
-      if (err) {
-        console.log('db error:', err);
-        reject(err);
+    connection.query(query, function (error, results) {
+      if (error) {
+        console.log('db error:', error);
+        reject(error);
       } else {
         resolve(results);
       }
