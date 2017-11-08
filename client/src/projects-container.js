@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { Overview } from './project.js';
-import { getProjectOutlines } from './api.js';
 import ReactResizeDetector from 'react-resize-detector';
 
 //list of projects
@@ -35,13 +34,7 @@ class ProjectsContainer extends Component {
       });
     }
   }
-  componentDidMount() {
-    getProjectOutlines().then(data => {
-      // this.setState({
-      //   projects: data,
-      // });
-    });
-  }
+  
   render () {
     let projects = this.props.projects.map(project => {
       return (<Overview key={project.slug} details={project}></Overview>);

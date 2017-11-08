@@ -1,7 +1,5 @@
-const port = process.env.PORT || '3001';
-console.log('portnumber is:', process.env.port);
 const env = process.env.NODE_ENV;
-const url = env!=='development'?``:'http://localhost:3001';
+const url = env!=='development'?``:'http://192.168.0.17:3001';
 /**
  * get all of the projects with there basic info such 
  * as Name, tools, subtitle, category, slug etc.
@@ -21,9 +19,7 @@ const getProjectOutlines = () => {
           category,
           slug
         } = project;
-        console.log("tags:", tags);
         tags = JSON.parse(tags);
-        console.log("tags:", tags);
         category = JSON.parse(category);
         return {
           name,

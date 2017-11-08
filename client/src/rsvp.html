@@ -1,0 +1,26 @@
+plans for future: 
+create backend independant of wedding wire to allow for more customization of RSVP Form
+Ideally create a RESTful API to accomplish this
+
+events/ ---login option? ---or just message requesting they provide an event id
+---GET how to create an event
+---POST create new event
+
+events/{id}
+---GET event details
+
+events/{id}/guests
+---GET guests for event
+---POST add new guest
+events/{id}/guests?status=undecided
+---GET all guests who haven't RSVP'ed
+events/{id}/guests?status=attending
+---GET all guests who are attending
+events/{id}/guests?status=declined
+---GET all guests who declined
+
+events/{id}/guests/{id}
+---GET specific guest for event
+---PUT update specific guest
+---DELETE remove guest
+

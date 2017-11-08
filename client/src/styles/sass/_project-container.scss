@@ -14,7 +14,6 @@
     height: 100%;
     max-height: none;
     width: 100%;
-    //border: 4px solid #6a7989;
     overflow: hidden;
     &:hover:before {
       opacity: 0;
@@ -44,12 +43,14 @@
   }
   .title {
     font-size: 1.25rem;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+    
   }
 }
-
+.view-wide .projects-container .title {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
 .projects-container .project a {
   display: flex;
   justify-content: center;
@@ -64,6 +65,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(200px, 27vh);
+  grid-gap: 5px;
 }
 .projects-container.columns-2 {
   display: grid;

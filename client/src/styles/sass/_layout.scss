@@ -16,6 +16,7 @@ html, body {
   bottom: 0px;
   width: 100%;
   pointer-events: none;
+  background: $bg-main-nav;
   @include testing(orange);
   a {
     @include testing(green);
@@ -34,15 +35,8 @@ html, body {
 .header-nav, .main {
   @include testing();
 }
-.main {
-  position: relative;
-}
 
 .view-small {
-  //show nav at bottom
-  .main {
-    margin-bottom: $main-nav-height;
-  }
   .main-nav {
     z-index: 10;
     
@@ -50,9 +44,9 @@ html, body {
     ul {
       display: flex;
       height: 100%;
+      justify-content: space-around;
     }
     li {
-      width: 50%;
       z-index: 10;
     }
     span {
@@ -90,7 +84,7 @@ html, body {
   }
 }
 .main-title {
-  height: $main-title-height;
+  height: $header-title-height;
 }
 .app-wrapper > div {
   position: relative;
@@ -107,17 +101,85 @@ html, body {
     visibility: hidden;
     opacity: 0;
   }
-  .main {
-    width: 100%;
-    height: 100vh;
-    @include centre();
-    flex-direction: column;
+}
+.main {
+  margin: #{$main-margin-top};
+  width: calc(100% - 2 * #{$main-margin-sides});
+  max-height: 100vh;
+  position: fixed;
+  overflow: auto;
+  left: 0px;
+  top: 0px;
+  padding-top: calc(#{$header-title-height} - #{$main-margin-top});
+  padding-bottom: calc(#{$header-title-height} - #{$main-margin-top});
+  height: calc(100vh - #{$main-margin-top} - #{$main-margin-bottom});
+}
+.view-wide .main {
+  margin: #{$main-margin-top} calc(#{$main-nav-button-width} + #{$main-margin-sides}) 0px;
+  width: calc(100% - 2 * #{$main-margin-sides} - 2 * #{$main-nav-button-width});
+  height: calc(100vh - #{$main-margin-top});
+}
+header.main {
+  height: calc(100vh - 2 * #{$header-title-height} - #{$main-margin-top});
+  @include centre();
+  flex-direction: column;
+}
+.view-small header.main {
+  height: calc(100vh - #{$main-margin-top} - #{$main-margin-bottom});
+}
+
+.main-title {
+  position: fixed;
+  width: 100%;
+  padding: 0 20px;
+  background: rgba(white, 1);
+  z-index: 10;
+  display: fixed;
+  
+  h1, p {
+    margin: 0;
+    padding: 5px 5px 5px 0px;
+  }
+  h1 {
+    font-size: 1em;
+  }
+  p {
+    font-size: 0.65em;
   }
 }
-.view-wide .main-title {
-  position: fixed;
-  z-index: 10;
+.main-title header {
+  display: flex;
+  height: 100%;
+  align-items: baseline;
+  padding: 7px 0px;
+   * {padding-right: 10px;}
 }
-.view-wide:not(.home) .main {
-  margin-top: $main-title-height;
+.view-small {
+  .main-nav, .main-title, .main-title * {
+    transition: 0.5s;
+  }
+  &.hide-on-scroll {
+    .main-nav {
+      height: calc(3 * #{$main-nav-height / 4});
+      span {
+        font-size: 0.75em;
+      }
+    }
+    .main-title {
+      height: 40px;
+      width: 100%;
+      background: white;
+      h1 {
+        font-size: 1em;
+      }
+      p {
+        font-size: 0.65em;
+        padding-left: 20px;
+      }
+    }
+    
+  }
+  .main > :last-child {
+    padding-bottom: 60px;
+  }
 }

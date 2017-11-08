@@ -4,19 +4,30 @@
 .project {
   @include testing();
   //background: $bg-project-container;
-  transition: 1s;
+  //transition: 1s;
 }
 
 //main project grid
 
-
-
+.main {
+  h2 {
+    margin: 0;
+    padding: 10px 0px;
+  }
+}
+.project.single section {
+  padding: 10px 15px;
+}
 .project.single {
   //styles for next prev buttons
   @media only screen and (min-width: $double-panels-60-40) {
     position: relative;
     min-height: 100vh;
   }
+  .project-tools {
+    display: flex;
+  }
+  
 }
 
 .prev, .next {
@@ -52,12 +63,6 @@
 
 .project-external-links, .project-tools, .project-categories, .project-nav ul {
   @include clean-list();
-}
-
-.project-nav {
-  position: fixed;
-  top: 0px;
-  right: 0px;
 }
 //if grid isn't supported, do this
 //@supports not (display: grid) {
