@@ -1,0 +1,94 @@
+.projects-container {
+  width: 100%;
+  max-width: 1800px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(200px, 20vh);
+  @each $colour in $colours-70s {
+
+  }
+  @for $i from 1 through 4 {
+    $c: nth($colours-70s, $i);
+    $d: $i + 4;
+    .project:nth-of-type(#{$i}), .project:nth-of-type(#{$d}) {
+      background-color: $c;
+    }
+  }
+  .project {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: red;
+    &:hover:before {
+      opacity: 1;
+    }
+    a {
+      z-index: 2;
+      @include full-size();
+      @include centre();
+      flex-direction: column;
+      position: relative; 
+    }
+  }
+  .project:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: white;
+    outline: 5px solid white;
+    opacity: 0;
+    //background-image: url('../images/circle.svg');
+    //background-color: $bg-project-container;
+    
+    transition: 0.5s;
+  }
+
+  &.columns-2, &.columns-3, &.columns-4 {
+    @for $i from 1 through 7 {
+      .project:nth-of-type(#{$i}) {
+          grid-area: image-#{$i};
+      }
+    }
+  }
+  &.columns-1 {
+    grid-auto-rows: minmax(200px, 27vh);
+  }
+  &.columns-2 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:"image-1 image-2"
+                        "image-3 image-2"
+                        "image-3 image-4"
+                        "image-5 image-5"
+                        "image-6 image-7"
+                        "image-6 image-8";
+  }
+  &.columns-3 {
+    grid-template-columns: 1fr 1fr 1fr;      
+    grid-template-areas: "image-1 image-2 image-2"
+                         "image-3 image-2 image-2"
+                         "image-3 image-4 image-5"
+                         "image-6 image-4 image-5"
+                         "image-6 image-7 image-7"
+                         "image-8 image-7 image-7";
+    grid-gap: 15px;
+  }
+  &.columns-4 {
+    padding: 0px 60px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;      
+    grid-template-areas: "image-1 image-1 empty-1 empty"
+                         "image-1 image-1 image-6 empty"
+                         "image-2 image-4 image-4 image-3"
+                         "empty-2 image-4 image-4 image-5"
+                         "image-8 image-9 image-7 image-7"
+                         "image-8 image-9 image-7 image-7";
+    grid-auto-rows: minmax(140px, 20vh);
+    grid-gap: 15px;
+  }
+}

@@ -1,0 +1,18 @@
+.main-nav *, .project-nav * {
+  font-family: 'Raleway', sans-serif;
+}
+.view-small .main-nav {
+  span {
+    letter-spacing: 0.4em;
+  }
+}
+.view-wide .main-nav {
+  span {
+    letter-spacing: 1em;
+  }
+}
+.view-small.hide-on-scroll {
+  .main-nav span {
+    font-size: 0.75em;
+  }
+}

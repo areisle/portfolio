@@ -1,20 +1,17 @@
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-  font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
-  font-weight: 500;
-}
 
-@import "functions";
-@import "variables";
-@import "layout";
+@import url('https://fonts.googleapis.com/css?family=Heebo:100');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:200,300,400');
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,400');
+@import url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/BOOTLE__.TTF');
+@import "functions/functions";
+@import "variables/variables";
+@import "normalize-additions";
+@import "layout/layout";
 @import "page_transitions";
-@import "header-nav";
-@import "project-container";
-@import "project";
-@import "project-nav";
-@import "project-overview";
-@import "icons";
-@import url('https://fonts.googleapis.com/css?family=Buda:300|Heebo:100|Italiana|Tenor+Sans|Uncial+Antiqua');
+@import "navigation/header-nav";
+@import "navigation/project-nav";
+@import "navigation/main";
+@import "elements/elements";
+@import "typography/headings";
+@import "typography/navigation";
+@import "typography/copy";

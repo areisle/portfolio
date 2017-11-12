@@ -1,0 +1,27 @@
+
+
+//main project grid
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  //font-family: 'Heebo', sans-serif;// 5/10 better as lowercase than upper
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+}
+
+.main {
+  h2 {
+    margin: 0;
+    padding: 10px 0px;
+  }
+}
+
+.projects-container,
+.project-external-links,
+.project-tools,
+.project-categories,
+.project-nav ul {
+  @include clean-list();
+}

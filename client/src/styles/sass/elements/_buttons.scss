@@ -1,0 +1,86 @@
+.button {
+  display: inline-block;
+  padding: 15px;
+  margin: 5px;
+  background: $colour__bg-button;
+  color: $colour__text-button;
+  text-transform: uppercase;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+}
+@mixin link-style-primary() {
+  color: $colour__link-text;
+}
+@mixin link-style-secondary() {
+  color: $colour__link-text;
+  &:visited {
+    color: lighten($colour__link-text, 30%);
+  }
+  &:active, &:focus {
+    color: lighten($colour__link-text, 70%);
+  }
+}
+.header-nav a, .project-nav a {
+  @include link-style-primary();
+}
+.projects-container .title {
+  @include link-style-secondary();
+}
+/*-------------------------
+    sections menu icon
+-------------------------*/
+
+.menu-icon {
+  height: $menu-icon-width;
+  width: $menu-icon-width;
+  position: relative;
+  background: $bg-main-nav;
+  transition: $duration__scroll-transition;
+}
+.hide-on-scroll .menu-icon {
+  height: calc(0.75 * #{$menu-icon-width});
+  width: calc(0.75 * #{$menu-icon-width});
+}
+.bar {
+  display: block;
+  position: absolute;
+  height: $menu-icon-line-height;
+  width: 100%;
+  transition: $menu-icon-transition-length;
+  left: 0px;
+  pointer-events: none;
+}
+.bar:before, .bar:nth-of-type(2):after {
+  content: '';
+  left: 0px;
+  width:100%;
+  height: $menu-icon-line-height;
+  position: absolute;
+  background: $menu-icon-color;
+  transition: $menu-icon-transition-length;
+  pointer-events: none;
+  border-radius: $menu-icon-line-height;
+}
+.bar:nth-of-type(1) {
+  top: 15%;
+}
+.bar:nth-of-type(2) {
+  top: calc(50% - #{$menu-icon-line-height} / 2);
+}
+.bar:nth-of-type(3) {
+  top: calc(85% - #{$menu-icon-line-height});
+}
+.expanded .menu-icon {
+  .bar:nth-of-type(1), .bar:nth-of-type(3) {
+    top: calc(50%);
+    &:before {
+      height: 0px;
+      opacity: 0;
+    }
+  }
+  .bar:nth-of-type(2):after {
+    transform: rotate(45deg);
+  }
+  .bar:nth-of-type(2):before {
+    transform: rotate(-45deg);
+  }
+}

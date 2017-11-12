@@ -1,0 +1,38 @@
+.project-overview {
+  .other {
+    position: relative;
+    background: $colour__bg-project-section;
+    outline: 10px solid $colour__bg-project-section;
+    margin-bottom: 100px;
+    padding-bottom: 15px;
+  }
+  .project-external-links {
+    position: absolute;
+    bottom: -100px;
+  }
+  .project-categories * {
+    display: inline;
+  }
+  .project-demos {
+    font-size: 0.75em;
+  }
+}
+.view-wide .project-overview {
+  .project-title {
+    z-index: 2;
+    position: relative;
+    margin-left: -100px;
+  }
+  .other {
+    margin-top: -50px;
+    padding: 50px;
+  }
+  .project-external-links {
+    right: 60px;
+    bottom: -40px;
+    display: flex;
+  }
+}
+.project-overview .other {
+  background-color: nth($colours-70s, 3);
+}

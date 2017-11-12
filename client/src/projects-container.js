@@ -37,10 +37,10 @@ class ProjectsContainer extends Component {
   
   render () {
     let projects = this.props.projects.map(project => {
-      return (<Overview key={project.slug} details={project}></Overview>);
+      return (<Overview key={project.slug} details={project} setScroll={this.props.setScroll}></Overview>);
     });
     return (
-      <ul className={`projects-container columns-${this.state.columns}`} >
+      <ul className={`projects-container columns columns-${this.state.columns}`} >
         {projects}
         <ReactResizeDetector handleWidth={true} onResize={this.updateLayout}></ReactResizeDetector>
       </ul>

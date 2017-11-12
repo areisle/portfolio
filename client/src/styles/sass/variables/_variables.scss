@@ -1,0 +1,76 @@
+
+/*-------------------
+      Layout     
+---------------------*/
+$breakpoint-0: 400px;
+$breakpoint-1: 500px;
+$breakpoint-2: 600px;
+$breakpoint-3: 800px;
+$breakpoint-4: 1200px;
+$double-panels-60-40: 1200px;
+$breakpoint-5: 1800px;
+
+/*-------------------
+      Fonts     
+---------------------*/
+@font-face {
+      font-family: 'Beatles';
+      src: url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio-public/BOOTLE__.TTF');
+      //src: url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio-public/FTY+SKORZHEN+NCV.ttf');
+}
+@font-face {
+      font-family: 'Beatles-2';
+      src: url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio-public/BOOTLE__.TTF');
+      src: url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio-public/FTY+SKORZHEN+NCV.ttf');
+}
+@import url('https://fonts.googleapis.com/css?family=Nixie+One');
+/*-------------------
+      Colours     
+---------------------*/
+//70's colours
+$colour__70s-light-grey: #EDE7E0;
+$colour__70s-medium-grey: #75797D;
+$colour__70s-dark-grey: #202228;
+$colour__70s-light-blue: #C6E7F5;
+$colour__70s-green: #5A8351;
+$colours-70s: ($colour__70s-medium-grey, $colour__70s-dark-grey, $colour__70s-light-blue, $colour__70s-green);
+$light-grey: rgb(236, 236, 236);
+$medium-grey: rgb(216, 214, 214);
+$white: rgb(255,255,255);
+$colour__background: rgb(255,255,255);
+$navy: rgb(100, 100, 255);
+$bg-project-container: rgb(240, 240, 240);
+$next-prev-border: rgb(216, 214, 214);
+$bg-main-nav: rgba($colour__background, 1);
+$bg-project-nav: rgb(255,255,255);
+$colour__bg-main-title: $colour__background;
+$colour__title-underline: rgb(163, 138, 25);
+$colour__bg-project-section: $colour__background;
+$colour__title-text: rgb(170, 15, 15);
+$colour__bg-button: rgb(170, 15, 15);
+$colour__text-button: $light-grey;
+$colour__bg-main: $colour__background;
+$colour__link-text: rgb(63, 84, 110);
+$menu-icon-color: rgb(126, 123, 123);
+/*-------------------
+   Component Sizes    
+---------------------*/
+$main-nav-height: 60px;
+$main-nav-button-width: 60px;
+$next-prev-btn-width: 40px;
+$size__next-prev-btn-width: 40px;
+$header-title-height: 40px;
+$main-margin-top: 20px;
+$main-margin-bottom: 20px;
+$main-margin-sides: 20px;
+$menu-icon-width: 40px;
+$menu-icon-line-height: 2px;
+/*--------------------------
+   Animation/Transitions    
+--------------------------*/
+$duration__scroll-transition: 0.5s;
+$menu-icon-transition-length: 0.5s;
+/*-------------------
+  Development Only    
+---------------------*/
+$testing: false;

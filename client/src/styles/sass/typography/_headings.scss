@@ -1,0 +1,70 @@
+.main {
+    .name{
+        font-family: 'Beatles';
+    }
+    .title {
+        font-family: 'Nixie One';
+    }
+}
+.main-title {
+    text-decoration: none;
+    background: $colour__bg-main-title;
+    .name, .title {
+        margin: 0;
+        padding: 5px 5px 5px 0px;
+    }
+    .name {
+        font-size: 1em;
+        font-family: 'Beatles';
+        text-transform: uppercase;
+    }
+    .title {
+        font-size: 0.65em;
+    }
+    span {
+        padding: 0;
+        text-transform: none;
+    }
+}
+.view-small.hide-on-scroll .main-title {
+    .name {
+        font-size: 1em;
+    }
+    .title {
+        font-size: 0.65em;
+    }
+}
+/*---------------------------
+      Projects Container     
+---------------------------*/
+.projects-container {
+    .title {
+        font-size: 1.25rem;
+        text-transform: uppercase;
+        font-family: 'Fira Sans Extra Condensed', sans-serif;
+    }
+}
+/*---------------------------
+          Project     
+---------------------------*/
+.single {
+    .project-title {
+        font-size: 2em;
+        text-transform: uppercase;
+        font-family: 'Fira Sans Extra Condensed', sans-serif;
+        margin: 15px 0px;
+        color: $colour__title-text;
+        @media only screen and (min-width: $breakpoint-0) {
+            font-size: 3em;
+        }
+        @media only screen and (min-width: $breakpoint-1) {
+            font-size: 3.5em;
+        }
+    }
+}
+.main-title * {
+    font-family: 'Raleway';
+}
+.view-wide .project-title {
+    font-size: 5em;
+}

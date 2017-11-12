@@ -1,0 +1,52 @@
+.project.single {
+  position: relative;
+  @include testing();
+  .project-tools {
+    display: flex;
+  }
+  section {
+    padding: 10px 15px;
+  }
+}
+.prev, .next {
+  display: block;
+  height: 40px;
+  @include testing(black);
+}
+.view-wide .project.single {
+  margin: 0 auto;
+  > *:not(.project-nav) {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  > section:not(.project-overview) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  //margin-left: calc(#{$size__next-prev-btn-width} + 100px);
+  max-width: calc(100vw - 2 * #{$main-nav-button-width} - 2 * #{$size__next-prev-btn-width});
+  .prev, .next {
+    position: fixed;
+    width: $next-prev-btn-width;
+    height: 100vh;
+    top: 0px;
+    @include centre();
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-left: 1px solid $next-prev-border;
+    border-right: 1px solid $next-prev-border;
+  }
+  .prev {
+    left: $main-nav-button-width;
+    background-image: url('../images/icons/back.svg');
+  }
+  .next {
+    right: $main-nav-button-width;
+    background-image: url('../images/icons/next.svg');
+  }
+}
+.project-demos {
+  @include clean-list();
+}
+@import "project/overview";

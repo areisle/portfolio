@@ -22,8 +22,8 @@ function AboutContact(props) {
 function MainOld(props) {
   return (
     <header className="main">
-      <h1>Abbey Reisle</h1>
-      <p>web developer/designer</p>
+      <h1 className="name">A<span>bb</span>ey Reisle</h1>
+      <p className="title">we<span>b</span> developer/designer</p>
     </header>
   );
 }
@@ -63,9 +63,8 @@ class App extends Component {
     } else {
       this.app.classList.remove('hide-on-scroll');
     }
-    
-    
   }
+  
   render () {
     let projects = this.state.projects;
     let length = projects.length;
@@ -81,19 +80,25 @@ class App extends Component {
           }/>
       );
     });
+    let path = this.props.location.pathname.split('/');
+    let location = path.pop();
+    let isProject = path.pop() === "portfolio";
+    let background = isProject ? `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${location}.jpg')`: 'none';
+    console.log('location: ', location, isProject);
     return (
-      <div className={`app-wrapper view view-${this.state.layout} ${(this.props.location.pathname === '/') ? 'home':''}`} >
+      <div className={`app-wrapper view view-${this.state.layout} ${(this.props.location.pathname === '/') ? 'home':isProject?'isProject':''}`}
+         >
         <div className="header-nav">
-          <NavLink key="home" to={'/'} activeClassName="hide" className={`main-title`}>
+          <NavLink key="home" to={'/'} activeClassName="hide" className={`main-title`} onClick={() => this.handleScroll(true)}>
             <header>
-              <h1>Abbey Reisle</h1>
-              <p>web developer/designer</p>
+              <h1 className="name">A<span>bb</span>ey Reisle</h1>
+              <p className="title">web developer/designer</p>
             </header>
           </NavLink>
           <nav className={`main-nav`}>
             <ul>
-              <li><NavLink key="portfolio" to={'/portfolio'}><span>Portfolio</span></NavLink></li>
-              <li><NavLink key="about" to={'/about-contact'}><span>About</span></NavLink></li>
+              <li><NavLink key="portfolio" to={'/portfolio'} onClick={() => this.handleScroll(true)}><span>Portfolio</span></NavLink></li>
+              <li><NavLink key="about" to={'/about-contact'} onClick={() => this.handleScroll(true)}><span>About</span></NavLink></li>
             </ul>
           </nav>
         </div>
@@ -104,8 +109,8 @@ class App extends Component {
           >
             <Switch location={this.props.location}>
               <Route exact path='/' component={MainOld}/>
-              <Route exact path='/about-contact' component={MainShell(AboutContact, {'onScroll': this.handleScroll})}/>
-              <Route exact path='/portfolio' component={MainShell(ProjectsContainer, {'onScroll': this.handleScroll, 'projects': this.state.projects})}/>
+              <Route exact path='/about-contact' component={MainShell(AboutContact, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true)})}/>
+              <Route exact path='/portfolio' component={MainShell(ProjectsContainer, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true), 'projects': this.state.projects})}/>
               {routes}  
             </Switch>
           </CSSTransition>

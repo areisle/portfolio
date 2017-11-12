@@ -1,5 +1,5 @@
 
-html, body {
+html, body, .app-wrapper {
   margin: 0;
   padding: 0;
   width: 100vw;
@@ -9,78 +9,24 @@ html, body {
 *::-webkit-scrollbar {
   display: none;
 }
-
-.main-nav {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  pointer-events: none;
-  background: $bg-main-nav;
-  @include testing(orange);
-  a {
-    @include testing(green);
-    @include full-size();
-    @include centre();
-    z-index: 10;
-    pointer-events: all;
-  }
-  ul {
-    @include clean-list();
-  }
-  li {
-    height: 100%;
-  }
+body {
+  background: $colour__bg-main;
 }
+
 .header-nav, .main {
   @include testing();
 }
 
-.view-small {
-  .main-nav {
-    z-index: 10;
-    
-    height: $main-nav-height;
-    ul {
-      display: flex;
-      height: 100%;
-      justify-content: space-around;
-    }
-    li {
-      z-index: 10;
-    }
-    span {
-      letter-spacing: 0.7em;
-    }
-  }
+.app-wrapper {
+  //background: url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/kitchen.jpg');
+  background-size: cover;
+  background-position: center center;
 }
 
 .view-wide {
   //show nav on either side?
   >div, .header-nav {
     margin: 0 calc(#{$main-nav-button-width} + #{$next-prev-btn-width});
-  }
-  .main-nav {
-    height: 100vh;
-    li {
-      position: absolute;
-      width: $main-nav-button-width;
-      span {
-        letter-spacing: 1em;
-      }
-    }
-    li:first-of-type {
-      left: 0px;
-      span {
-        transform: rotate(-90deg);
-      }
-    }
-    li:last-of-type {
-      right: 0px;
-      span {
-        transform: rotate(90deg);
-      }
-    }
   }
 }
 .main-title {
@@ -127,25 +73,15 @@ header.main {
 .view-small header.main {
   height: calc(100vh - #{$main-margin-top} - #{$main-margin-bottom});
 }
-
+.main {
+  z-index: 1;
+}
 .main-title {
   position: fixed;
   width: 100%;
   padding: 0 20px;
-  background: rgba(white, 1);
   z-index: 10;
   display: fixed;
-  
-  h1, p {
-    margin: 0;
-    padding: 5px 5px 5px 0px;
-  }
-  h1 {
-    font-size: 1em;
-  }
-  p {
-    font-size: 0.65em;
-  }
 }
 .main-title header {
   display: flex;
@@ -155,31 +91,22 @@ header.main {
    * {padding-right: 10px;}
 }
 .view-small {
-  .main-nav, .main-title, .main-title * {
-    transition: 0.5s;
+  .main-title, .main-title * {
+    transition: $duration__scroll-transition;
   }
   &.hide-on-scroll {
-    .main-nav {
-      height: calc(3 * #{$main-nav-height / 4});
-      span {
-        font-size: 0.75em;
-      }
-    }
     .main-title {
       height: 40px;
       width: 100%;
-      background: white;
-      h1 {
-        font-size: 1em;
-      }
       p {
-        font-size: 0.65em;
         padding-left: 20px;
       }
     }
-    
   }
   .main > :last-child {
     padding-bottom: 60px;
   }
 }
+@import "project";
+//@import "project-container";
+@import "projects-container";

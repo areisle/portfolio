@@ -1,5 +1,5 @@
 const env = process.env.NODE_ENV;
-const url = env!=='development'?``:'http://192.168.0.17:3001';
+const url = env!=='development'?``:'http://localhost:3001';
 /**
  * get all of the projects with there basic info such 
  * as Name, tools, subtitle, category, slug etc.
