@@ -9,13 +9,15 @@ import { getProject } from './api.js';
  */
 class Overview extends Component {
   render() {
-    let {name, category, tags, slug} = this.props.details;
-    let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}></Icon></li>);
+    let {name, category, tags, slug, background} = this.props.details;
+    let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}
+    ></Icon></li>);
+    let style = background ? {backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}: {};
     return (
       <li className="project" 
         category={category} 
         tools={tags.tools}
-        style={{backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}} >
+        style={style} >
         <Link to={`/portfolio/${slug}`} onClick={this.props.setScroll}>
           <h2 className="title">{name}</h2>
           <ul className="icons-container">{icons}</ul>
@@ -34,7 +36,7 @@ class Project extends Component {
     super(props);
     let { slug } = this.props.details;
     this.state = {
-      project: [],
+      project: {description: 'test'},
       open: false
     };
     getProject(slug).then(data => {
@@ -50,11 +52,13 @@ class Project extends Component {
     });
     
   }
+  
   render () {
-    let {name, tags, category, slug} = this.props.details;
+    let {name, tags, category, slug, background} = this.props.details;
+    let project = this.state.project;
     let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}></Icon></li>);
     let categories = category.map(tool => (<li key={tool}>{tool}</li>));
-    
+    let style = background ? {backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}: {};
     return (
       <div className="project single" ref={(el) => this.project = el}>
         <nav className={`project-nav ${this.state.open ? 'expanded':''}`}>
@@ -75,7 +79,7 @@ class Project extends Component {
         <section className="project-overview" id="overview">
           <h2 className="project-title">{name}</h2>
           <div className="other" 
-            style={{backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}}>
+            style={style}>
             <p dangerouslySetInnerHTML={{__html: this.state.project.description}}></p>
             <ul className="project-tools">{icons}</ul>
             
@@ -86,8 +90,8 @@ class Project extends Component {
               <li><p>Status: InProgress</p></li>
             </ul>
             <ul className="project-external-links">
-              <li><a className="button" target="_blank" rel="noopener noreferrer" href="https://github.com/areisle">view on github</a></li>
-              <li><a className="button" target="_blank" rel="noopener noreferrer" href="https://github.com/areisle">view live</a></li>
+              <li><a className="button" target="_blank" rel="noopener noreferrer" href={project.github}>view on github</a></li>
+              <li><a className="button" target="_blank" rel="noopener noreferrer" href={project.livelink}>view live</a></li>
             </ul>
           </div>
         </section>

@@ -14,19 +14,12 @@ const getProjectOutlines = () => {
     }).then((response) => {
       return response.map(project => {
         let {
-          name,
           tags,
-          category,
-          slug
+          category
         } = project;
-        tags = JSON.parse(tags);
-        category = JSON.parse(category);
-        return {
-          name,
-          tags,
-          category,
-          slug
-        };
+        project.tags = JSON.parse(tags);
+        project.category = JSON.parse(category);
+        return project;
       });
     });
 };

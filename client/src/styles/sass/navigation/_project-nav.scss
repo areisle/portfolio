@@ -1,3 +1,4 @@
+
 .project-nav {
     position: fixed;
     button {
@@ -32,14 +33,17 @@
         width: 100%;
         height: 60px;
         background: $bg-main-nav;
-        outline: none;
-        border: none;
         transition: $duration__scroll-transition;
         @include centre();
     }
     .menu-icon {
         opacity: 0;
         transition: $duration__scroll-transition;
+    }
+}
+.view-small:not(.hide-on-scroll) .project-nav {
+    button {
+        pointer-events: none;
     }
 }
 .view-small.hide-on-scroll {

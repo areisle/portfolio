@@ -81,13 +81,10 @@ class App extends Component {
       );
     });
     let path = this.props.location.pathname.split('/');
-    let location = path.pop();
+    path.pop();
     let isProject = path.pop() === "portfolio";
-    let background = isProject ? `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${location}.jpg')`: 'none';
-    console.log('location: ', location, isProject);
     return (
-      <div className={`app-wrapper view view-${this.state.layout} ${(this.props.location.pathname === '/') ? 'home':isProject?'isProject':''}`}
-         >
+      <div className={`app-wrapper view view-${this.state.layout} ${(this.props.location.pathname === '/') ? 'home':isProject?'isProject':''}`}>
         <div className="header-nav">
           <NavLink key="home" to={'/'} activeClassName="hide" className={`main-title`} onClick={() => this.handleScroll(true)}>
             <header>

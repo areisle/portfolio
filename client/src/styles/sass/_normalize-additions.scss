@@ -25,3 +25,8 @@ html {
 .project-nav ul {
   @include clean-list();
 }
+button {
+  outline: none;
+  border: none;
+  background: none;
+}

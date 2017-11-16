@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class Main extends Component {
   constructor(props) {
@@ -8,9 +9,10 @@ class Main extends Component {
       scrollingUp: true
     };
     this.handleScroll = this.handleScroll.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
   handleScroll(e) {
-    if (e.target.scrollTop > this.state.lastScroll) {
+    if (e.target.scrollTop > this.state.lastScroll && e.target.scrollTop > 10) {
       //scrolling down
       this.setState({
         scrollingUp: false,
@@ -25,10 +27,19 @@ class Main extends Component {
     }
     this.props.onScroll(this.state.scrollingUp);
   }
-
+  scrollToTop() {
+    const main = ReactDOM.findDOMNode(this.refs.main);
+    main.scrollTo(0,0);
+    this.setState({
+      scrollingUp: true,
+      lastScroll: 0
+    });
+    this.props.onScroll(true);
+  }
   render () {
     return (
-      <main className={`main`} onScroll={this.handleScroll}>
+      <main className={`main`} onScroll={this.handleScroll} ref="main">
+        <button className="scroll-to-top" onClick={this.scrollToTop}></button>
         {this.props.children}
       </main>
     );

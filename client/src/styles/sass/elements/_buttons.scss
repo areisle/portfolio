@@ -1,3 +1,17 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 0px;
+  left: 55%;
+  z-index: 50;
+  display: none;
+  width: 45px;
+  height: 45px;
+  background-image: url('../images/icons/double-up-arrow.png');
+  background-size: contain;
+}
+.hide-on-scroll .scroll-to-top {
+  display: block;
+}
 .button {
   display: inline-block;
   padding: 15px;
@@ -83,4 +97,7 @@
   .bar:nth-of-type(2):before {
     transform: rotate(-45deg);
   }
+}
+.button[href="none"] {
+  display: none;
 }

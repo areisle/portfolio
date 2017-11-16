@@ -33,7 +33,29 @@ $colour__70s-medium-grey: #75797D;
 $colour__70s-dark-grey: #202228;
 $colour__70s-light-blue: #C6E7F5;
 $colour__70s-green: #5A8351;
-$colours-70s: ($colour__70s-medium-grey, $colour__70s-dark-grey, $colour__70s-light-blue, $colour__70s-green);
+$colour__70s-turquoise: #8Bc1b4;
+$colour-1: rgba(183, 179, 179, 1);
+$colour-2: rgba(87, 106, 97, 1);
+$colour-3: rgba(56, 60, 72, 1);
+$colour-4: rgba(128, 157, 174, 1);
+$colour-5: rgba(112, 156, 100, 1);
+$colours-70s-new: (
+      $colour-5,
+      $colour-2, 
+      $colour-3,
+      $colour-4 
+      );
+$colours-70s: (
+      $colour__70s-green,
+      $colour__70s-medium-grey, 
+      $colour__70s-dark-grey,
+      $colour__70s-turquoise 
+      );
+$colours-70s-text: (
+      $colour__70s-dark-grey, 
+      $colour__70s-dark-grey,       
+      $colour__70s-light-grey, 
+      $colour__70s-dark-grey);
 $light-grey: rgb(236, 236, 236);
 $medium-grey: rgb(216, 214, 214);
 $white: rgb(255,255,255);

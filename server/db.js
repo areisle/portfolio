@@ -12,7 +12,7 @@ let connection = mysql.createPool({
 let db = {};
 db.getProjectOutlines = () => {
   return new Promise(function (resolve, reject) {
-    connection.query('SELECT name, slug, category, tags FROM Projects', function (error, results) {
+    connection.query('SELECT name, slug, category, tags, background FROM Projects ORDER BY priority', function (error, results) {
       if (error) {
         console.log('db error:', error);
         reject(error);
