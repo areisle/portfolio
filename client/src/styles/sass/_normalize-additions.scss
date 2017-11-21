@@ -18,11 +18,14 @@ html {
   }
 }
 
-.projects-container,
-.project-external-links,
-.project-tools,
-.project-categories,
-.project-nav ul {
+// .projects-container,
+// .project-external-links,
+// .project-tools,
+// .project-categories,
+// .project-nav ul {
+//   @include clean-list();
+// }
+ul {
   @include clean-list();
 }
 button {

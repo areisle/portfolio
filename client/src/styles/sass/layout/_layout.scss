@@ -49,7 +49,7 @@ body {
   }
 }
 .main {
-  margin: #{$main-margin-top};
+  margin: #{$main-margin-top} #{$main-margin-sides} #{$main-margin-bottom};
   width: calc(100% - 2 * #{$main-margin-sides});
   max-height: 100vh;
   position: fixed;

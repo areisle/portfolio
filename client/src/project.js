@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProject } from './api.js';
-
+import { Sample } from './gallery.js';
 /**
  * Component to display the overview of a project 
  * that will be seen on the portfolio page
@@ -115,11 +115,7 @@ class Project extends Component {
         </section>
         <section className="project-gallery" id="gallery">
           <h2>Gallery</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus sint consequatur deserunt, 
-            eius corporis dolore vero distinctio possimus laborum facilis cumque ipsam consequuntur illum aperiam cupiditate, veritatis, 
-            rem provident.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi facere, 
-            ex error dolore libero sed dolorum rem itaque placeat et voluptatum nihil asperiores sunt iusto, 
-            eum culpa voluptatem beatae expedita.</p>
+          <Sample/>
         </section>
         <section className="project-critique" id="critique">
           <h2>Critique</h2>

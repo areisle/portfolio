@@ -4,7 +4,7 @@
   .project-tools {
     display: flex;
   }
-  section {
+  section:not(.project-gallery) {
     padding: 10px 15px;
   }
 }
@@ -16,7 +16,7 @@
 .view-wide .project.single {
   margin: 0 auto;
   > *:not(.project-nav) {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
   }
   > section:not(.project-overview) {
@@ -50,3 +50,4 @@
   @include clean-list();
 }
 @import "project/overview";
+@import "project/gallery";
