@@ -38,10 +38,19 @@ const getProject = (slug) => {
       return response.map(project => {
         let {
           tags,
-          category
+          category,
+          gallery
         } = project;
         project.tags = JSON.parse(tags);
         project.category = JSON.parse(category);
+        project.gallery = JSON.parse(gallery);
+        if (project.gallery) {
+          //https://s3.ca-central-1.amazonaws.com/areisle-portfolio/photography-portfolio-gallery-5-portfolio.jpg
+          project.gallery.map(image => {
+            image.src = `https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${project.slug}-${image.src}`;
+            return image;
+          });
+        }       
         return project;
       })[0];
     });

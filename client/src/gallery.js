@@ -2,54 +2,32 @@
 // import Slickr from 'react-slick';
 import React, {Component} from 'react';
 import Lightbox from 'react-images';
-import ReactResizeDetector from 'react-resize-detector';
-import ReactDOM from 'react-dom';
+import Swipe from 'react-easy-swipe';
 
 class PhotoSlide extends Component {
-  componentDidMount() {
-    console.log(this.refs.slide.height, 'slide');
-  }
   render() {
     return (
-      <li className="slide" ref={`slide`}>
-        <img src={this.props.src} onClick={this.props.handleClick} alt="test"/>
+      <li className="slide" onClick={this.props.onClick}>
+        <img ref="img" src={this.props.src}  alt="test"/>
       </li>
     );
   }
 }
-class Slick extends Component {
-  constructor(props){             
-    super(props);                 
-    this.state = { 
-      currentImage: 0,
-      length: this.props.photos.length
-    }; 
-    // this.gotoNext = this.gotoNext.bind(this);
-    // this.gotoPrevious = this.gotoPrevious.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-    console.log(this.refs.test.clientHeight, "test test");
-    this.setState({
-      currentImage: (this.state.currentImage + 1) % this.state.length
-    });
-    console.log(this.state);
-  }
-
-  componentDidMount() {
-    console.log(this.refs.test.offsetHeight);    
-    console.log(ReactDOM.findDOMNode(this.refs.test).clientHeight);
-  }
+class Slides extends Component {
   render () {
-    let Slides = this.props.photos.map((photo, i) => <PhotoSlide ref={`slide${i}`} key={i} {...photo} onClick={() => this.handleClick()}/>);
+    let Slides = this.props.photos.map((photo, i) => <PhotoSlide ref={`slide${i}`} key={i} {...photo} onClick={this.props.handleClick}/>);
     return (
-      <div className="aer_slick" onClick={this.handleClick}>
-        <ul ref="test" style={{transform: `translateX(-${this.state.currentImage * 100}%)`}}>{Slides}</ul>
+      <div
+        className="aer_slick"
+      >
+        <button className="btn-next" onClick={this.props.onClickNext}>next</button>
+        <button className="btn-prev" onClick={this.props.onClickPrev}>prev</button>
+        <ul style={{transform: `translateX(-${100 * this.props.currentImage}%)`}}>{Slides}</ul>
       </div>
     );
   }
 }
-class Sample extends Component {
+class Slick extends Component {
   constructor(props){             
     super(props);                 
     this.state = { currentImage: 0 }; 
@@ -58,84 +36,51 @@ class Sample extends Component {
     this.gotoNext = this.gotoNext.bind(this);
     this.gotoPrevious = this.gotoPrevious.bind(this);
   }
-  openLightbox(index, obj) {
-    console.log(obj);
+  openLightbox() {
     this.setState({
-      currentImage: index,
       lightboxIsOpen: true,
     });  
   }
   closeLightbox() {
     this.setState({
-      currentImage: 0,
       lightboxIsOpen: false,
     }); 
   }
   gotoPrevious() {
     this.setState({
-      currentImage: (this.state.currentImage - 1) % PHOTO_SET.length,                                                           
+      currentImage: (this.state.currentImage + this.props.photos.length - 1) % this.props.photos.length
     });  
   }
   gotoNext() {
     this.setState({
-      currentImage: (this.state.currentImage + 1) % PHOTO_SET.length,                                            
+      currentImage: (this.state.currentImage + 1) % this.props.photos.length,
     }); 
   }
   render() {
-    // const settings = {
-    //   speed: 500,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    //   responsive: [ { breakpoint: 400, settings: 'unslick' } ],
-    // };
-    // let Images = PHOTO_SET.map((image, i) => <div className="slide" key={i} index={i} onClick={() => this.openLightbox(i)}><img src={image.src}/></div>);
+    console.log(this.props);
     return (
       <div>
-        {/* <Gallery photos={PHOTO_SET} onClick={this.openLightbox} /> */}
-        {/* <div className="slick-wrapper">
-          <Slickr className="slick" {...settings}>
-            {Images}
-          </Slickr>
-        </div> */}
-        <Lightbox images={PHOTO_SET}
-          backdropClosesModal={true}
-          onClose={this.closeLightbox}
-          onClickPrev={this.gotoPrevious}
-          onClickNext={this.gotoNext}
-          currentImage={this.state.currentImage}
-          isOpen={this.state.lightboxIsOpen}
-        />
-        <Slick photos={PHOTO_SET}/>
+        <Swipe
+          onSwipeLeft={this.gotoNext}
+          onSwipeRight={this.gotoPrevious}>
+          <Lightbox images={this.props.photos}
+            backdropClosesModal={true}
+            onClose={this.closeLightbox}
+            onClickPrev={this.gotoPrevious}
+            onClickNext={this.gotoNext}
+            currentImage={this.state.currentImage}
+            isOpen={this.state.lightboxIsOpen}
+          />
+          <Slides photos={this.props.photos}
+            currentImage={this.state.currentImage}
+            onClickPrev={this.gotoPrevious}
+            onClickNext={this.gotoNext}
+            handleClick={this.openLightbox}
+          />
+        </Swipe>
       </div>
     );
   }
 }
-const PHOTO_SET = [
-  {
-    src: require('./images/Individual-Photo.jpg'),
-    width: 4,
-    height: 3
-  },
-  {
-    src: require('./images/Home.jpg'),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require('./images/Project.jpg'),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require('./images/Services.jpg'),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require('./images/Portfolio.jpg'),
-    width: 1,
-    height: 1
-  }
-];
 
-export { Sample };
+export { Slick };

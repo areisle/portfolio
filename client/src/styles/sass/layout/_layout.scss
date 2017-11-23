@@ -61,7 +61,7 @@ body {
   height: calc(100vh - #{$main-margin-top} - #{$main-margin-bottom});
 }
 .view-wide .main {
-  margin: #{$main-margin-top} calc(#{$main-nav-button-width} + #{$main-margin-sides}) 0px;
+  margin: calc(2*#{$main-margin-top}) calc(#{$main-nav-button-width} + #{$main-margin-sides}) 0px;
   width: calc(100% - 2 * #{$main-margin-sides} - 2 * #{$main-nav-button-width});
   height: calc(100vh - #{$main-margin-top});
 }

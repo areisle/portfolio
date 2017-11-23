@@ -7,6 +7,9 @@
   section:not(.project-gallery) {
     padding: 10px 15px;
   }
+  section:last-of-type {
+    min-height: 50vh;
+  }
 }
 .prev, .next {
   display: block;
