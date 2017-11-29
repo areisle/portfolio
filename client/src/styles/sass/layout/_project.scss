@@ -4,11 +4,12 @@
   .project-tools {
     display: flex;
   }
-  section:not(.project-gallery) {
+  > section:not(.project-gallery) {
     padding: 10px 15px;
   }
-  section:last-of-type {
+  > section:last-of-type {
     min-height: 50vh;
+    padding-bottom: 60px;
   }
 }
 .prev, .next {
@@ -21,6 +22,15 @@
   > *:not(.project-nav) {
     max-width: 900px;
     margin: 0 auto;
+    @media only screen and (min-width: 1500px) {
+      max-width: 1000px;
+    }
+    @media only screen and (min-width: 1600px) {
+      max-width: 1100px;
+    }
+    @media only screen and (min-width: 2000px) {
+      max-width: 1500px;
+    }
   }
   > section:not(.project-overview) {
     padding-left: 50px;
@@ -52,5 +62,76 @@
 .project-demos {
   @include clean-list();
 }
+.iframe-wrapper {
+  display: block;
+  position: relative;
+  margin: 10px 0px;  
+  height: 0px;
+  width: 100%;
+}
+
+iframe {
+  border: 2px solid grey;
+}
+.iframe-wrapper.desktop {
+  width: 100%;
+  padding-bottom: 56.2%;
+  > a {
+    display: none;
+  }
+	@media only screen and (min-width: 1600px){
+    width: 80%;
+    padding-bottom: 44.8%;
+  }
+  @media only screen and (max-width: 830px){
+    height: auto;
+    padding: 10px;
+    iframe {
+      display: none;
+    }
+    > a {
+      display: block;
+    }
+  }
+}
+.iframe-wrapper.mobile {
+  width: 200px;
+  padding-bottom: 352px;
+  @media only screen and (min-width: 1600px){
+    width: 15%;
+    padding-bottom: 26.4%;
+  }
+}
+.iframes-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  .description {
+    p {
+      max-width: 800px;
+      padding: 5px;
+    }
+    min-width: 100%;
+    width: 50%;
+    @media only screen and (min-width: 400px) {
+      min-width: 300px;
+    }
+    @media only screen and (min-width: 1600px) {
+      width: 100%;
+    }
+  }
+}
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
 @import "project/overview";
 @import "project/gallery";
+@import "project/highlights";

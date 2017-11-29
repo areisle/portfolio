@@ -3,12 +3,16 @@
 import React, {Component} from 'react';
 import Lightbox from 'react-images';
 import Swipe from 'react-easy-swipe';
+import { RightArrow, LeftArrow } from './icons.js';
 
 class PhotoSlide extends Component {
   render() {
     return (
       <li className="slide" onClick={this.props.onClick}>
-        <img ref="img" src={this.props.src}  alt="test"/>
+        <figure>
+          <img ref="img" src={this.props.src}  alt="test"/>
+          <figcaption className="description">{this.props.description}</figcaption>
+        </figure>
       </li>
     );
   }
@@ -20,13 +24,14 @@ class Slides extends Component {
       <div
         className="aer_slick"
       >
-        <button className="btn-next" onClick={this.props.onClickNext}>next</button>
-        <button className="btn-prev" onClick={this.props.onClickPrev}>prev</button>
+        <button className="btn-next" onClick={this.props.onClickNext}><RightArrow/></button>
+        <button className="btn-prev" onClick={this.props.onClickPrev}><LeftArrow/></button>
         <ul style={{transform: `translateX(-${100 * this.props.currentImage}%)`}}>{Slides}</ul>
       </div>
     );
   }
 }
+
 class Slick extends Component {
   constructor(props){             
     super(props);                 
@@ -57,7 +62,6 @@ class Slick extends Component {
     }); 
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <Swipe

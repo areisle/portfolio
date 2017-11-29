@@ -6,8 +6,7 @@
   display: none;
   width: 45px;
   height: 45px;
-  background-image: url('../images/icons/double-up-arrow.png');
-  background-size: contain;
+  padding: 10px;
 }
 .hide-on-scroll .scroll-to-top {
   display: block;
@@ -46,6 +45,11 @@
 .menu-icon {
   height: $menu-icon-width;
   width: $menu-icon-width;
+  @media only screen and (max-width: 400px) {
+    height: calc(#{$menu-icon-width} - 10px);
+    width: calc(#{$menu-icon-width} - 10px);
+    margin-left: 30px;
+  }
   position: relative;
   background: $bg-main-nav;
   transition: $duration__scroll-transition;
@@ -53,6 +57,7 @@
 .hide-on-scroll .menu-icon {
   height: calc(0.75 * #{$menu-icon-width});
   width: calc(0.75 * #{$menu-icon-width});
+  margin-left: 0px;
 }
 .bar {
   display: block;

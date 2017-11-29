@@ -4,6 +4,10 @@
     button {
         display: none;
     }
+    .button {
+        color: white;
+        text-transform: none;
+    }
     ul {
         flex-direction: column;
         z-index: 50;
@@ -17,6 +21,20 @@
     @include centre();
     background: rgba($bg-project-nav, 0);
     transition: 0.5s;
+}
+.view-small .project-nav .button {
+    //border-bottom: 3px solid $colour__bg-button;
+    background: none;
+    color: inherit; 
+ }
+.view-wide .project-nav .button {
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s; 
+ }
+.view-wide.hide-on-scroll .project-nav .button {
+   visibility: visible;
+   opacity: 1; 
 }
 .view-small .project-nav {
     width: 100%;
@@ -37,25 +55,26 @@
         @include centre();
     }
     .menu-icon {
-        opacity: 0;
+        //opacity: 0;
         transition: $duration__scroll-transition;
     }
 }
 .view-small:not(.hide-on-scroll) .project-nav {
     button {
-        pointer-events: none;
+        //pointer-events: none;
     }
 }
 .view-small.hide-on-scroll {
-    .button {
+    .button, .project-nav button {
         z-index: 9999;
         height: 45px;        
     }
+    
     .menu-icon {
         opacity: 1;
     }
 }
-.project-nav.expanded {
+.view-small .project-nav.expanded {
     background: rgba($bg-project-nav, 0.9);    
     height: calc(100%);
     z-index: 20;
@@ -63,14 +82,27 @@
 }
 .view-wide .project-nav {
     //margin-left: 80px;
+    z-index: 1000;
+    .external-link {
+        width: 100px;
+        text-align: center;
+    }
     margin-top: 25vh;
     @media only screen and (min-width: 1300px){
-        margin-left: 40px; 
+        margin-left: 20px; 
     }
     @media only screen and (min-width: 1400px){
         margin-left: 60px; 
     }
     @media only screen and (min-width: 1600px){
         margin-left: 80px; 
+    }
+}
+
+.view-small .project.single {
+    .prev, .next {
+        padding: 5px;
+        width: 50%;
+        display: inline-block;
     }
 }

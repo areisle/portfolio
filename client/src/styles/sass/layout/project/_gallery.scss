@@ -49,10 +49,10 @@
   .btn-next, .btn-prev {
     position: absolute;
     width: 40px;
-    height: 40px;
+    height: 50px;
     top: calc(50% - 20px);
-    background: white;
     z-index: 100;
+    padding: 0;
   }
   .btn-next {
     right: 0px;
@@ -71,9 +71,9 @@
   }
   img {
     object-fit: contain;
-    max-width: 100%;
+    width: 100%;
     display: block;
-    max-height: 100%;
+    height: 100%;
   }
   li {
     flex-shrink: 0;
@@ -82,3 +82,41 @@
     pointer-events: all;
   }
 }
+.text-slides {
+  background: grey;
+  ul {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+  }
+  li {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+  li.show {
+    opacity: 1;
+  }
+}
+.slide {
+  .description {
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  figure {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+
+
+

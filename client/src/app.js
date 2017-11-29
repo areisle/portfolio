@@ -108,6 +108,9 @@ class App extends Component {
               <Route exact path='/' component={MainOld}/>
               <Route exact path='/about-contact' component={MainShell(AboutContact, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true)})}/>
               <Route exact path='/portfolio' component={MainShell(ProjectsContainer, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true), 'projects': this.state.projects})}/>
+              <Route exact path='/test'>
+                <main>this is a test Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor a sint quos corporis. Temporibus, veritatis magni accusamus nulla incidunt perspiciatis et praesentium qui sit adipisci odio distinctio omnis ipsa debitis.    dfgkldjfgdfgdfjkdflkgjad gadlkgjadlkgja gal kjgdag</main>
+              </Route>
               {routes}  
             </Switch>
           </CSSTransition>

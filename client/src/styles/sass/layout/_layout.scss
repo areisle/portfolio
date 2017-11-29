@@ -59,6 +59,7 @@ body {
   padding-top: calc(#{$header-title-height} - #{$main-margin-top});
   padding-bottom: calc(#{$header-title-height} - #{$main-margin-top});
   height: calc(100vh - #{$main-margin-top} - #{$main-margin-bottom});
+  scroll-behavior: smooth;
 }
 .view-wide .main {
   margin: calc(2*#{$main-margin-top}) calc(#{$main-nav-button-width} + #{$main-margin-sides}) 0px;

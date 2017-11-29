@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { UpArrows } from './icons.js';
 
 class Main extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Main extends Component {
   render () {
     return (
       <main className={`main`} onScroll={this.handleScroll} ref="main">
-        <button className="scroll-to-top" onClick={this.scrollToTop}></button>
+        <button className="scroll-to-top" onClick={this.scrollToTop}><UpArrows/></button>
         {this.props.children}
       </main>
     );
