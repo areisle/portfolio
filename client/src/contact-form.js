@@ -15,13 +15,8 @@ class ContactForm extends Component {
       valid: false,
       fireRedirect: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.validateItem = this.validateItem.bind(this);
-    this.validate = this.validate.bind(this);
   }
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
     const input = this.state[target.name];
     const content = target.type === 'checkbox' ? target.checked : target.value;
@@ -35,7 +30,7 @@ class ContactForm extends Component {
       valid: this.validate()
     });
   }
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     console.log('submitted');
     //maybe try update/ validate fields here for autofill issues?
@@ -51,7 +46,7 @@ class ContactForm extends Component {
       sendEmail(mail).then(/*response => this.setState({ fireRedirect: true })*/);
     }
   }
-  validate() {
+  validate = () => {
     const fields = ['firstname', 'lastname', 'company', 'email', 'message'];
     let valid = true;
     fields.forEach(field => {
@@ -60,7 +55,7 @@ class ContactForm extends Component {
     });
     return valid;
   }
-  handleBlur(event) {
+  handleBlur = (event) => {
     const target = event.target;
     const input = this.state[target.name];
     const content = event.target.value;
@@ -74,7 +69,7 @@ class ContactForm extends Component {
     //if filled, add class
     //if errors, add errors
   }
-  validateItem(item, value) {
+  validateItem = (item, value) => {
     return (
       (item === 'email') ? isEmail(value):
       (item === 'firstname' || item === 'lastname') ? isAlpha(value):

@@ -39,7 +39,7 @@ class Main extends Component {
   }
   render () {
     return (
-      <main className={`main`} onScroll={this.handleScroll} ref="main">
+      <main className={`main`} onScroll={this.handleScroll} ref={this.props.inputRef}>
         <button className="scroll-to-top" onClick={this.scrollToTop}><UpArrows/></button>
         {this.props.children}
       </main>
@@ -49,7 +49,7 @@ class Main extends Component {
 
 const MainShell = (Page, myprops) => {
   return (props =>
-    <Main {...myprops}>
+    <Main {...myprops} inputRef={"test"}>
       <Page {...props} {...myprops}/>
     </Main>
   );

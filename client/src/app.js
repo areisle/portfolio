@@ -4,15 +4,16 @@ import './styles/index.css';
 import { Project } from './project.js';
 import { getProjectOutlines } from './api.js';
 import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
-import {ContactForm} from './contact-form.js';
+import { ContactForm } from './contact-form.js';
 import {About} from './about.js';
 //import ReactResizeDetector from 'react-resize-detector';
 import {ProjectsContainer} from './projects-container.js';
-import MainShell from './page-shell.js';
+import withMain from './wrapper.js';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { MainNav } from './navigation-main.js';
 function AboutContact(props) {
   return (
-    <div>
+    <div className="contact-page">
       <About {...props}/>
       <ContactForm {...props}/>
     </div>
@@ -35,16 +36,15 @@ class App extends Component {
       projects: [],
       layout: 'small',
       currentProject: {},
+      slide: 'block'
     };
     getProjectOutlines().then(data => {
       this.setState({
         projects: data,
       });
     });
-    
-    this.updateLayout = this.updateLayout.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
   }
+
   componentDidMount() {
     //add resize event listener
     this.updateLayout();
@@ -52,12 +52,13 @@ class App extends Component {
     this.app = document.querySelector('.app-wrapper');
   }
   
-  updateLayout() {
+  updateLayout = () => {
     this.setState({
       layout: (window.innerWidth >= 1200) ? 'wide': 'small'
     });
   }
-  handleScroll(up) {
+
+  handleScroll = (up) => {
     if (!up) {
       this.app.classList.add('hide-on-scroll');
     } else {
@@ -65,6 +66,18 @@ class App extends Component {
     }
   }
   
+  animateSlide = (dir) => {
+    if (dir === 'left') {
+      this.app.classList.add('left');
+      this.app.classList.remove('right');
+    } else if (dir === 'right') {
+      this.app.classList.add('right');
+      this.app.classList.remove('left');
+    } else {
+      this.app.classList.remove('left');
+      this.app.classList.remove('right');
+    }
+  }
   render () {
     let projects = this.state.projects;
     let length = projects.length;
@@ -72,33 +85,22 @@ class App extends Component {
       let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
       return (
         <Route key={`${project.slug}`} exact path={`/portfolio/${project.slug}`}
-          component={MainShell(Project, 
+          component={withMain(Project, 
             {'onScroll': this.handleScroll, 
               'details': project, 
               'next': projects[next].slug, 
-              'prev': projects[prev].slug})
+              'prev': projects[prev].slug, 
+              'slide': this.animateSlide })
           }/>
       );
     });
     let path = this.props.location.pathname.split('/');
-    path.pop();
-    let isProject = path.pop() === "portfolio";
+    let subcat = path.pop();
+    let cat = path.pop();
+    let isProject = (cat && subcat) ? "isProject": "";
     return (
-      <div className={`app-wrapper view view-${this.state.layout} ${(this.props.location.pathname === '/') ? 'home':isProject?'isProject':''}`}>
-        <div className="header-nav">
-          <NavLink key="home" to={'/'} activeClassName="hide" className={`main-title`} onClick={() => this.handleScroll(true)}>
-            <header>
-              <h1 className="name">A<span>bb</span>ey Reisle</h1>
-              <p className="title">web developer/designer</p>
-            </header>
-          </NavLink>
-          <nav className={`main-nav`}>
-            <ul>
-              <li><NavLink key="portfolio" to={'/portfolio'} onClick={() => this.handleScroll(true)}><span>Portfolio</span></NavLink></li>
-              <li><NavLink key="about" to={'/about-contact'} onClick={() => this.handleScroll(true)}><span>About</span></NavLink></li>
-            </ul>
-          </nav>
-        </div>
+      <div className={`app-wrapper view view-${this.state.layout} ${isProject}`}>
+        <MainNav handleScroll={this.handleScroll}/>
         <TransitionGroup>
           <CSSTransition key={this.props.location.key}
             classNames='fade'
@@ -106,11 +108,10 @@ class App extends Component {
           >
             <Switch location={this.props.location}>
               <Route exact path='/' component={MainOld}/>
-              <Route exact path='/about-contact' component={MainShell(AboutContact, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true)})}/>
-              <Route exact path='/portfolio' component={MainShell(ProjectsContainer, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true), 'projects': this.state.projects})}/>
-              <Route exact path='/test'>
-                <main>this is a test Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor a sint quos corporis. Temporibus, veritatis magni accusamus nulla incidunt perspiciatis et praesentium qui sit adipisci odio distinctio omnis ipsa debitis.    dfgkldjfgdfgdfjkdflkgjad gadlkgjadlkgja gal kjgdag</main>
-              </Route>
+              <Route exact path='/about-contact'
+                component={withMain(AboutContact, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true)})}/>
+              <Route exact path='/portfolio' 
+                component={withMain(ProjectsContainer, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true), 'projects': this.state.projects})}/>
               {routes}  
             </Switch>
           </CSSTransition>
@@ -119,4 +120,5 @@ class App extends Component {
     );
   }
 }
+
 export default withRouter(App);
