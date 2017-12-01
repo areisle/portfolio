@@ -22,6 +22,11 @@
   color: $colour__text-button;
   text-transform: uppercase;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
+  border: none;
+  transition: background 0.3s;
+  &:hover, &:focus {
+    background: darken($colour__bg-button, 20%);
+  }
 }
 @mixin link-style-primary() {
   color: $colour__link-text;

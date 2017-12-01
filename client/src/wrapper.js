@@ -38,9 +38,20 @@ function withMain(WrappedComponent, myprops) {
 
     render() {
       return (
-        <main className={`main ${myprops.className}`} onScroll={this.handleScroll} ref="main">
-          <button className="scroll-to-top" onClick={this.scrollToTop}><UpArrows/></button>
-          <WrappedComponent {...this.props} {...myprops} scrollPosition={this.state.lastScroll}/>
+        <main 
+          className={`main`} 
+          onScroll={this.handleScroll} 
+          ref="main">
+          <button 
+            className="scroll-to-top" 
+            onClick={this.scrollToTop}>
+            <UpArrows/>
+          </button>
+          <WrappedComponent 
+            {...this.props} 
+            {...myprops} 
+            scrollPosition={this.state.lastScroll}
+          />
         </main>
       );
     }

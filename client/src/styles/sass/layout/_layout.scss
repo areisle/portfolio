@@ -64,7 +64,7 @@ body {
 .view-wide .main {
   margin: calc(2*#{$main-margin-top}) calc(#{$main-nav-button-width} + #{$main-margin-sides}) 0px;
   width: calc(100% - 2 * #{$main-margin-sides} - 2 * #{$main-nav-button-width});
-  height: calc(100vh - #{$main-margin-top});
+  height: calc(100vh - 4 * #{$main-margin-top});
 }
 header.main {
   height: calc(100vh - 2 * #{$header-title-height} - #{$main-margin-top});
@@ -82,7 +82,15 @@ header.main {
   width: 100%;
   padding: 0 20px;
   z-index: 10;
-  display: fixed;
+  left: 0px;
+  top: 0px;
+  &.hide {
+    visibility: hidden;
+  }
+}
+.view-wide .main-title {
+  width: calc(100% - 200px);
+  margin: 0px 100px;
 }
 .main-title header {
   display: flex;
