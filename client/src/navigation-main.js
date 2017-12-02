@@ -6,7 +6,7 @@ const MainNav = (props) => {
     <div className="header-nav">
       <NavLink 
         key="home" 
-        to={'/'} 
+        exact to={'/'} 
         activeClassName="hide" 
         className="main-title"
         onClick={() => props.handleScroll(true)}>

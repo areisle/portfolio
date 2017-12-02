@@ -65,7 +65,7 @@ class App extends Component {
       this.app.classList.remove('hide-on-scroll');
     }
   }
-  
+
   animateSlide = (dir) => {
     if (dir === 'left') {
       this.app.classList.add('left');
@@ -81,23 +81,12 @@ class App extends Component {
   render () {
     let projects = this.state.projects;
     let length = projects.length;
-    let routes = projects.map((project, index) => {
-      let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
-      return (
-        <Route key={`${project.slug}`} exact path={`/portfolio/${project.slug}`}
-          component={withMain(Project, 
-            {'onScroll': this.handleScroll, 
-              'details': project, 
-              'next': projects[next].slug, 
-              'prev': projects[prev].slug, 
-              'slide': this.animateSlide })
-          }/>
-      );
-    });
+    let slugs = projects.map(project => project.slug);
     let path = this.props.location.pathname.split('/');
     let subcat = path.pop();
     let cat = path.pop();
     let isProject = (cat && subcat) ? "isProject": "";
+    console.log(this.props.match.isExact);
     return (
       <div className={`app-wrapper view view-${this.state.layout} ${isProject}`}>
         <MainNav handleScroll={this.handleScroll}/>
@@ -109,10 +98,25 @@ class App extends Component {
             <Switch location={this.props.location}>
               <Route exact path='/' component={MainOld}/>
               <Route exact path='/about-contact'
-                component={withMain(AboutContact, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true)})}/>
+                component={withMain(AboutContact, 
+                  { 'onScroll': this.handleScroll, 
+                    'setScroll': () => this.handleScroll(true)})
+                }
+              />
               <Route exact path='/portfolio' 
-                component={withMain(ProjectsContainer, {'onScroll': this.handleScroll, 'setScroll': () => this.handleScroll(true), 'projects': this.state.projects})}/>
-              {routes}  
+                component={withMain(ProjectsContainer, 
+                  { 'onScroll': this.handleScroll, 
+                    'setScroll': () => this.handleScroll(true), 
+                    'projects': this.state.projects})
+                }
+              />
+              <Route exact path='/portfolio/:project'
+                component={withMain(Project, 
+                  {'onScroll': this.handleScroll,
+                    'projects': slugs, 
+                    'slide': this.animateSlide })
+                }
+              />
             </Switch>
           </CSSTransition>
         </TransitionGroup> 

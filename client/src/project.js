@@ -47,13 +47,19 @@ const ExternalLink = (props) => {
 class Project extends Component {
   constructor(props) {
     super(props);
-    let { slug } = this.props.details;
+    let slug = this.props.match.params.project;
+    let { projects } = this.props;
+    let length = projects.length;
+    let index = projects.indexOf(slug);
+    let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
     this.state = {
       project: {
         description: 'test',
         category: [],
-        tags: {'tools': []}
+        tags: {'tools': []},
       },
+      prev: projects[prev],
+      next: projects[next],
       open: false,
     };
     getProject(slug).then(data => {
@@ -92,7 +98,6 @@ class Project extends Component {
     
     let style = background ? {backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}: {};
     let status = (complete) ? "Complete": "InProgress";
-
     return (
       <div 
         className={`project single ${this.state.alternateNav ? 'alternate': ''}`} 
@@ -100,7 +105,6 @@ class Project extends Component {
         onScroll={this.handleScroll}
         id="project"
       > 
-        
         <ProjectNav scroll={this.scrollTo} sections={sections} livelink={project.livelink} github={project.github}/>
         <div className="project-content">
           <section ref={el => this.overview = el} className="project-overview" id="overview">
@@ -137,8 +141,8 @@ class Project extends Component {
             show={(sections.includes('critique'))}
           />
         </div>
-        <Link className="prev" to={`/portfolio/${this.props.prev}`} onClick={() => this.props.slide('left')}><LeftArrow/></Link>
-        <Link className="next" to={`/portfolio/${this.props.next}`} onClick={() => this.props.slide('right')}><RightArrow/></Link>
+        <Link className="prev" to={`/portfolio/${this.state.prev}`} onClick={() => this.props.slide('left')}><LeftArrow/></Link>
+        <Link className="next" to={`/portfolio/${this.state.next}`} onClick={() => this.props.slide('right')}><RightArrow/></Link>
         
       </div>
     );
