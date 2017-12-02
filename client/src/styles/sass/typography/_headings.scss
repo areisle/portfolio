@@ -9,21 +9,23 @@
 .main-title {
     text-decoration: none;
     background: $colour__bg-main-title;
+    letter-spacing: 0.05em;
     .name, .title {
         margin: 0;
         padding: 5px 5px 5px 0px;
     }
     .name {
         font-size: 1em;
-        font-family: 'Beatles';
-        text-transform: uppercase;
+        //font-family: 'Beatles';
+        //text-transform: uppercase;
+        letter-spacing: 0.1em;
     }
     .title {
         font-size: 0.65em;
     }
     span {
         padding: 0;
-        text-transform: none;
+        //text-transform: none;
     }
 }
 .view-small.hide-on-scroll .main-title {

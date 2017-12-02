@@ -11,11 +11,9 @@ class ProjectsContainer extends Component {
       projects: [],
       columns: 1
     };
-    
-    this.updateLayout = this.updateLayout.bind(this);
   }
   
-  updateLayout(width) {
+  updateLayout = (width) => {
     const oldcolumns = this.state.columns;
     let newcolumns = oldcolumns;
     

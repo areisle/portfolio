@@ -3,13 +3,16 @@
   bottom: 0px;
   left: 55%;
   z-index: 50;
-  display: none;
+  visibility: hidden;
   width: 45px;
   height: 45px;
   padding: 10px;
+  transition: 0.5s;
+  opacity: 0;
 }
 .hide-on-scroll .scroll-to-top {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 .button {
   display: inline-block;
@@ -19,6 +22,11 @@
   color: $colour__text-button;
   text-transform: uppercase;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
+  border: none;
+  transition: background 0.3s;
+  &:hover, &:focus {
+    background: darken($colour__bg-button, 20%);
+  }
 }
 @mixin link-style-primary() {
   color: $colour__link-text;

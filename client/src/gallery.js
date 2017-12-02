@@ -36,27 +36,23 @@ class Slick extends Component {
   constructor(props){             
     super(props);                 
     this.state = { currentImage: 0 }; 
-    this.closeLightbox = this.closeLightbox.bind(this); 
-    this.openLightbox = this.openLightbox.bind(this);
-    this.gotoNext = this.gotoNext.bind(this);
-    this.gotoPrevious = this.gotoPrevious.bind(this);
   }
-  openLightbox() {
+  openLightbox = () => {
     this.setState({
       lightboxIsOpen: true,
     });  
   }
-  closeLightbox() {
+  closeLightbox = () => {
     this.setState({
       lightboxIsOpen: false,
     }); 
   }
-  gotoPrevious() {
+  gotoPrevious = () => {
     this.setState({
       currentImage: (this.state.currentImage + this.props.photos.length - 1) % this.props.photos.length
     });  
   }
-  gotoNext() {
+  gotoNext = () => {
     this.setState({
       currentImage: (this.state.currentImage + 1) % this.props.photos.length,
     }); 

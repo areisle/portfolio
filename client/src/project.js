@@ -28,7 +28,18 @@ class Overview extends Component {
     );
   }
 }
-
+const ExternalLink = (props) => {
+  return (
+    <a 
+      className="button" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      href={props.href}
+    >
+      {props.text} <DiagonalArrow/>
+    </a>
+  );
+}
 /**
  * display a full project
  * @extends Component
@@ -36,81 +47,102 @@ class Overview extends Component {
 class Project extends Component {
   constructor(props) {
     super(props);
-    let { slug } = this.props.details;
+    let slug = this.props.match.params.project;
+    let { projects } = this.props;
+    let length = projects.length;
+    let index = projects.indexOf(slug);
+    let [prev, next] = [(index + length - 1)%length, (index + 1)%length];
     this.state = {
-      project: {description: 'test'},
+      project: {
+        description: 'test',
+        category: [],
+        tags: {'tools': []},
+      },
+      prev: projects[prev],
+      next: projects[next],
       open: false,
-      hasGallery: false
     };
     getProject(slug).then(data => {
-      let hasGallery = (data.gallery !== null);
       this.setState({
         project: data,
-        hasGallery: hasGallery
       });
     });
-    this.scrollTo = this.scrollTo.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
   }
-  scrollTo(ref) {
+  scrollTo = (ref) => {
     this[ref].scrollIntoView({
-      alignToTop: true,
+      block: 'start',
       behavior: 'smooth'
     });
   }
-  handleScroll(e) {
-    console.log(this.overview.offsetTop);
-    
+  componentWillReceiveProps() {
+    if (this.overview && this.props.scrollPosition > this.overview.offsetTop + this.overview.offsetHeight) {
+      this.setState({
+        alternateNav: true
+      });
+    } else {
+      this.setState({
+        alternateNav: false
+      });
+    }
   }
   render () {
-    let {name, tags, category, slug, background} = this.props.details;
     let project = this.state.project;
+    let {name, tags, category, slug, background, complete} = project;
     let icons = tags.tools.map(tool => <li key={tool}><Icon name={tool}></Icon></li>);
     let categories = category.map(tool => (<li key={tool}>{tool}</li>));
     let sections = ['overview'];
+
     if (project.highlights) sections.push('highlights');    
     if (project.gallery) sections.push('gallery');
-    if (project.critique) sections.push('critique');    
-    let style = background ? {backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}: {};
+    if (project.critique) sections.push('critique');
     
+    let style = background ? {backgroundImage: `url('https://s3.ca-central-1.amazonaws.com/areisle-portfolio/${slug}.jpg')`}: {};
+    let status = (complete) ? "Complete": "InProgress";
     return (
       <div 
-        className="project single" 
+        className={`project single ${this.state.alternateNav ? 'alternate': ''}`} 
         ref={(el) => this.project = el}
         onScroll={this.handleScroll}
         id="project"
-      >
+      > 
         <ProjectNav scroll={this.scrollTo} sections={sections} livelink={project.livelink} github={project.github}/>
-        <section ref={el => this.overview = el} className="project-overview" id="overview">
-          <h2 className="project-title">{name}</h2>
-          <div className="other" 
-            style={style}>
-            <p dangerouslySetInnerHTML={{__html: this.state.project.description}}></p>
-            <ul className="project-tools">{icons}</ul>
-            <Demos categories={categories} status="InProgress"/>
-            <ul className="project-external-links">
-              <li><a className="button" target="_blank" rel="noopener noreferrer" href={project.github}>view on github <DiagonalArrow/></a></li>
-              <li><a className="button" target="_blank" rel="noopener noreferrer" href={project.livelink}>view live <DiagonalArrow/></a></li>
-            </ul>
-          </div>
-        </section>
-        <Highlights
-          inputRef={el => this.highlights = el} 
-          content={this.state.project.highlights} 
-          show={(sections.includes('highlights'))}
-        />
-        <Gallery 
-          inputRef={el => this.gallery = el}                     
-          photos={project.gallery} 
-          show={(sections.includes('gallery'))}
-        />
-        <Critique
-          inputRef={el => this.critique = el}                   
-          content={this.state.project.critique} 
-          show={(sections.includes('critique'))}
-        />
-        <Link className="prev" to={`/portfolio/${this.props.prev}`}><LeftArrow/></Link>
-        <Link className="next" to={`/portfolio/${this.props.next}`}><RightArrow/></Link>
+        <div className="project-content">
+          <section ref={el => this.overview = el} className="project-overview" id="overview">
+            <h2 className="project-title">{name}</h2>
+            <div className="other" 
+              style={style}>
+              <p dangerouslySetInnerHTML={{__html: project.description}}></p>
+              <ul className="project-tools">{icons}</ul>
+              <Demos 
+                categories={categories} 
+                status={status} 
+                collaborators={project.collaborators} 
+                length={project.length}
+              />
+              <ul className="project-external-links">
+                <li><ExternalLink href={project.github} text="view on github"/></li>
+                <li><ExternalLink href={project.livelink} text="view live"/></li>
+              </ul>
+            </div>
+          </section>
+          <Highlights
+            inputRef={el => this.highlights = el} 
+            content={project.highlights} 
+            show={(sections.includes('highlights'))}
+          />
+          <Gallery 
+            inputRef={el => this.gallery = el}                     
+            photos={project.gallery} 
+            show={(sections.includes('gallery'))}
+          />
+          <Critique
+            inputRef={el => this.critique = el}                   
+            content={project.critique} 
+            show={(sections.includes('critique'))}
+          />
+        </div>
+        <Link className="prev" to={`/portfolio/${this.state.prev}`} onClick={() => this.props.slide('left')}><LeftArrow/></Link>
+        <Link className="next" to={`/portfolio/${this.state.next}`} onClick={() => this.props.slide('right')}><RightArrow/></Link>
         
       </div>
     );
@@ -162,19 +194,16 @@ const Gallery = HOCSect(Slick,
  * Component to display an icon
  * @extends Component
  */
-class MenuIcon extends Component {
-  //leave as this for now, but possibly add link or button wrapper later
-  render () {
-    return (
-      <button onClick={this.props.onClick}>
-        <div className="menu-icon">
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </div>
-      </button>
-    );
-  }
+const MenuIcon = (props) => {
+  return (
+    <button onClick={props.onClick}>
+      <div className="menu-icon">
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
+    </button>
+  );
 }
 
 /**
@@ -188,33 +217,32 @@ class ProjectNav extends Component {
     this.state = {
       open: false,
     };
-    this.toggleOpen = this.toggleOpen.bind(this);
-    this.scrollTo = this.scrollTo.bind(this);
   }
   
-  scrollTo(e, ref) {
+  scrollTo = (e, ref) => {
     e.preventDefault();
     this.props.scroll(ref);
     this.toggleOpen();
   }
 
-  toggleOpen() {
+  toggleOpen = () => {
     this.setState({
       'open': !this.state.open
     });
   }
 
   render () {
-    let items = this.props.sections.map( section => (<li key={section}><a href={`#${section}`} onClick={(e) => this.scrollTo(e, section)}>{section}</a></li>));
-    let github = (this.props.github !== "none") ? <li className="external-link"><a className="button" target="_blank" rel="noopener noreferrer" href={this.props.github}>github<DiagonalArrow/></a></li> : "";
-    let livelink = (this.props.livelink !== "none") ? <li className="external-link"><a className="button" target="_blank" rel="noopener noreferrer" href={this.props.livelink}>live<DiagonalArrow/></a></li> : "";
+    const { github, livelink, sections } = this.props;
+    let items = sections.map( section => (<li key={section}><a href={`#${section}`} onClick={(e) => this.scrollTo(e, section)}>{section}</a></li>));
+    let Github = (github !== "none") ? <li className="external-link"><ExternalLink href={github} text="github"/></li> : "";
+    let Livelink = (livelink !== "none") ? <li className="external-link"><ExternalLink href={livelink} text="live"/></li> : "";
     return (
       <nav className={`project-nav ${this.state.open ? 'expanded':''}`}>
         <MenuIcon onClick={this.toggleOpen}/>
         <ul>
           {items}
-          {livelink}
-          {github}
+          {Livelink}
+          {Github}
         </ul>
       </nav>
     );

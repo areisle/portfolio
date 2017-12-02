@@ -4,14 +4,14 @@
     background: $colour__bg-project-section;
     outline: 10px solid $colour__bg-project-section;
     margin-bottom: 100px;
-    padding-bottom: 15px;
+    padding: 1px 10px 15px;
   }
   .project-external-links {
     position: absolute;
     bottom: -100px;
   }
   .project-categories * {
-    display: inline;
+    display: inline; 
   }
   .project-demos {
     font-size: 0.75em;

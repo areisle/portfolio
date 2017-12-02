@@ -1,0 +1,30 @@
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 120px);
+  
+  @media only screen and (min-width: 800px) {
+    flex-direction: row;
+    //align-items: flex-start;
+    justify-content: space-around;
+    > section {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+.contact-form {
+  flex-shrink: 0;
+  flex-grow: 2;
+  max-height: 100%;
+  overflow: auto;
+  
+}
+.about {
+  flex-shrink: 2;
+  max-width: 600px;
+  @media only screen and (min-width: 800px) {
+    width: 50%;
+  }
+}

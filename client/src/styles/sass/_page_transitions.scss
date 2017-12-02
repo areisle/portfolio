@@ -2,16 +2,44 @@
     opacity: 0;
 }
 .fade-enter.fade-enter-active {
-    transition: opacity 0.5s;
+    transition: opacity 0.5s, transform 0.5s;
     opacity: 1;
 }
 .fade-exit {
     opacity: 1;
+    pointer-events: none;
 }
 .fade-exit.fade-exit-active {
-    transition: opacity 0.5s;
+    transition: opacity 0.5s, transform 0.5s;
     opacity: 0;
 }
+.right {
+    .fade-enter .project-content {
+        transform: translateX(100%);
+    }
+    .fade-enter.fade-enter-active .project-content {
+        transition: opacity 0.5s, transform 0.5s;
+        transform: translateX(0);
+    }
+    .fade-exit.fade-exit-active .project-content {
+        transition: opacity 0.5s, transform 0.5s;
+        transform: translateX(-100%);
+    }
+}
+.left {
+    .fade-enter .project-content {
+        transform: translateX(-100%);
+    }
+    .fade-enter.fade-enter-active .project-content {
+        transition: opacity 0.5s, transform 0.5s;
+        transform: translateX(0);
+    }
+    .fade-exit.fade-exit-active .project-content {
+        transition: opacity 0.5s, transform 0.5s;
+        transform: translateX(100%);
+    }
+}
+
 .main-nav span {
     transition: 0.5s;
 }

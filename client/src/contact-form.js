@@ -15,13 +15,8 @@ class ContactForm extends Component {
       valid: false,
       fireRedirect: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.validateItem = this.validateItem.bind(this);
-    this.validate = this.validate.bind(this);
   }
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
     const input = this.state[target.name];
     const content = target.type === 'checkbox' ? target.checked : target.value;
@@ -35,7 +30,7 @@ class ContactForm extends Component {
       valid: this.validate()
     });
   }
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     console.log('submitted');
     //maybe try update/ validate fields here for autofill issues?
@@ -51,7 +46,7 @@ class ContactForm extends Component {
       sendEmail(mail).then(/*response => this.setState({ fireRedirect: true })*/);
     }
   }
-  validate() {
+  validate = () => {
     const fields = ['firstname', 'lastname', 'company', 'email', 'message'];
     let valid = true;
     fields.forEach(field => {
@@ -60,7 +55,7 @@ class ContactForm extends Component {
     });
     return valid;
   }
-  handleBlur(event) {
+  handleBlur = (event) => {
     const target = event.target;
     const input = this.state[target.name];
     const content = event.target.value;
@@ -74,7 +69,7 @@ class ContactForm extends Component {
     //if filled, add class
     //if errors, add errors
   }
-  validateItem(item, value) {
+  validateItem = (item, value) => {
     return (
       (item === 'email') ? isEmail(value):
       (item === 'firstname' || item === 'lastname') ? isAlpha(value):
@@ -92,25 +87,66 @@ class ContactForm extends Component {
           <h2>Contact</h2>
           <input type="hidden" name="subject" value="message from contact form"/>
           <div className="row">
-            <Input name="First Name" slug="firstname" value={firstname}  required={true} change={this.handleChange} blur={this.handleBlur} error="First Name Must be at least 2 Characters and contain only letters"></Input>
-            <Input name="Last Name" slug="lastname" value={lastname}  required={true} change={this.handleChange} blur={this.handleBlur} error="Last Name Must be at least 2 Characters and contain only letters"></Input>
+            <Input 
+              name="First Name" 
+              slug="firstname" 
+              value={firstname}  
+              required={true} 
+              change={this.handleChange} 
+              blur={this.handleBlur} 
+              error="First Name Must be at least 2 Characters and contain only letters"
+            />
+            <Input 
+              name="Last Name" 
+              slug="lastname" 
+              value={lastname}  
+              required={true} 
+              change={this.handleChange} 
+              blur={this.handleBlur} 
+              error="Last Name Must be at least 2 Characters and contain only letters"
+            />
           </div>
           <div className="row">
-            <Input name="Company" slug="company" value={company} change={this.handleChange} blur={this.handleBlur} error="Company Name may only contain letters and numbers"></Input>
+            <Input 
+              name="Company" 
+              slug="company" 
+              value={company} 
+              change={this.handleChange} 
+              blur={this.handleBlur} 
+              error="Company Name may only contain letters and numbers"
+            />
           </div>
           <div className="row">
-            <Input name="Email" slug="email" value={email}  required={true} change={this.handleChange} blur={this.handleBlur} error="Must Be a Valid Email Address"></Input>
+            <Input 
+              name="Email" 
+              slug="email" 
+              value={email}  
+              required={true} 
+              change={this.handleChange} 
+              blur={this.handleBlur} 
+              error="Must Be a Valid Email Address"
+            />
           </div>
           <div className="row">
-            <Textarea type="textarea" name="Message" slug="message" value={message}  required={true} change={this.handleChange} blur={this.handleBlur} error="Message is required"></Textarea>
+            <Textarea 
+              type="textarea" 
+              name="Message" 
+              slug="message" 
+              value={message}  
+              required={true} 
+              change={this.handleChange} 
+              blur={this.handleBlur} 
+              error="Message is required"
+            />
           </div>
           <div className="row">
-            <input className={``} 
+            <input className={`button`} 
               type="submit" 
               id="submit" 
               name="submit" 
               value="send"
-              disabled={this.valid}/>
+              disabled={this.valid}
+            />
           </div>
         </form>
         {fireRedirect && (
@@ -132,7 +168,7 @@ function Textarea(props) {
       <label className="input__label input__label--haruki" htmlFor={props.slug}>
         <span className="input__label-content input__label-content--haruki">{props.name}</span>
       </label>
-      <Error show={props.value.errors && !props.value.pristine} message={props.error}></Error>
+      <Error show={props.value.errors && !props.value.pristine} message={props.error}/>
     </span>
   );
 }
@@ -148,7 +184,7 @@ function Input(props) {
       <label className="input__label input__label--haruki" htmlFor={props.slug}>
         <span className="input__label-content input__label-content--haruki">{props.name}</span>
       </label>
-      <Error show={props.value.errors && !props.value.pristine} message={props.error}></Error>
+      <Error show={props.value.errors && !props.value.pristine} message={props.error}/>
     </span>
   );
 }
