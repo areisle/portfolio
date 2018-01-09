@@ -43,7 +43,7 @@ class ContactForm extends Component {
         "message" : this.state.message.content,
         "subject" : "email from contact form"
       };
-      sendEmail(mail).then(/*response => this.setState({ fireRedirect: true })*/);
+      sendEmail(mail);
     }
   }
   validate = () => {

@@ -15,6 +15,7 @@
 .prev, .next {
   display: block;
   height: 40px;
+  background: white;
   @include testing(black);
 }
 .view-wide .project.single {

@@ -1,5 +1,6 @@
 const env = process.env.NODE_ENV;
 const url = env!=='development'?``:'http://localhost:3001';
+console.log(url);
 /**
  * get all of the projects with there basic info such 
  * as Name, tools, subtitle, category, slug etc.
@@ -74,7 +75,7 @@ const sendEmail = (data) => {
     mode: 'cors'
   })
     .then((response) => {
-      return response.json();
+      return response;
     });
 };
 

@@ -115,9 +115,9 @@
     grid-template-areas: "image-1 image-1 empty-1 empty"
                          "image-1 image-1 image-3 empty"
                          "image-4 image-2 image-2 image-5"
-                         "empty-2 image-2 image-2 image-7"
-                         "image-8 image-9 image-6 image-6"
-                         "image-8 image-9 image-6 image-6";
+                         "empty-2 image-2 image-2 image-5"
+                         "image-8 image-7 image-6 image-6"
+                         "image-8 image-7 image-6 image-6";
     grid-auto-rows: minmax(140px, 20vh);
     grid-gap: 15px;
   }

@@ -1,10 +1,22 @@
 .project-overview {
   .other {
     position: relative;
-    background: $colour__bg-project-section;
-    outline: 10px solid $colour__bg-project-section;
     margin-bottom: 100px;
     padding: 1px 10px 15px;
+    * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .other::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+    z-index: 0;
+    background: rgba(white, 0.4);
   }
   .project-external-links {
     position: absolute;
@@ -35,7 +47,7 @@
   }
 }
 .project-overview .other {
-  background-color: nth($colours-70s, 3);
+  background-color: nth($colours-70s, 4);
   background-position: center center;
   background-size: cover;
 }

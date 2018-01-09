@@ -36,7 +36,6 @@ class App extends Component {
       projects: [],
       layout: 'small',
       currentProject: {},
-      slide: 'block'
     };
     getProjectOutlines().then(data => {
       this.setState({
@@ -86,7 +85,6 @@ class App extends Component {
     let subcat = path.pop();
     let cat = path.pop();
     let isProject = (cat && subcat) ? "isProject": "";
-    console.log(this.props.match.isExact);
     return (
       <div className={`app-wrapper view view-${this.state.layout} ${isProject}`}>
         <MainNav handleScroll={this.handleScroll}/>

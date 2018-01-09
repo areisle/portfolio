@@ -111,7 +111,7 @@ class Project extends Component {
             <h2 className="project-title">{name}</h2>
             <div className="other" 
               style={style}>
-              <p dangerouslySetInnerHTML={{__html: project.description}}></p>
+              <p className="project-description" dangerouslySetInnerHTML={{__html: project.description}}></p>
               <ul className="project-tools">{icons}</ul>
               <Demos 
                 categories={categories} 
